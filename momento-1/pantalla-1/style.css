@@ -1,0 +1,134 @@
+/* CONFIGURACIÓN GENERAL */
+
+/* Hace que los bordes y espacios internos se incluyan dentro del tamaño de los elementos. */
+* {
+    box-sizing: border-box;
+}
+
+/* Configuración general de toda la página. */
+body {
+    margin: 0; /* Elimina los márgenes que agrega el navegador por defecto. */
+    background-color: #252525; /* Fondo oscuro que se verá alrededor de la ilustración. */
+    font-family: Arial, sans-serif; /* Tipo de letra provisional. Después podemos cambiarlo. */
+}
+
+
+/* CONTENEDOR DEL JUEGO */
+
+#contenedor-juego {
+    width: 100%; /* Ocupa todo el ancho disponible. */
+    min-height: 100vh; /* Ocupa como mínimo toda la altura de la pantalla. */
+
+    display: flex; /* Permite organizar y centrar los elementos internos. */
+    justify-content: center; /* Centra la ilustración horizontalmente. */
+    align-items: center; /* Centra la ilustración verticalmente. */
+}
+
+
+/* IMAGEN Y ELEMENTOS SUPERPUESTOS */
+
+#pantalla {
+    /* 
+    Define el ancho de la ilustración.
+    100vw: no supera el ancho de la pantalla.
+    430px: establece un ancho máximo.
+    56.25vh: limita el ancho para que una imagen vertical 9:16 quepa en la altura.
+    */
+    width: min(100vw, 430px, 56.25vh);
+
+    position: relative; /* Sirve como referencia para ubicar los elementos encima de la imagen. */
+}
+
+#escritorio {
+    width: 100%; /* La imagen ocupa todo el ancho del contenedor. */
+    height: auto; /* Conserva las proporciones originales de la ilustración. */
+    display: block; /* Evita espacios adicionales debajo de la imagen. */
+}
+
+
+/* RECUADRO DEL TÍTULO */
+
+#texto-inicio {
+    position: absolute; /* Permite ubicar el recuadro encima de la imagen. */
+
+    top: 6%; /* Distancia desde la parte superior de la ilustración. */
+    left: 10%; /* Distancia desde el lado izquierdo. */
+    width: 80%; /* Ancho del recuadro. */
+
+    background-color: white; /* Fondo blanco para distinguir el texto de la ilustración. */
+    border: 3px solid #9b795c; /* Borde café para darle apariencia de interfaz antigua. */
+    padding: 8px; /* Espacio entre el texto y el borde. */
+
+    text-align: center; /* Centra el texto dentro del recuadro. */
+}
+
+
+/* RECUADRO DEL PENSAMIENTO */
+
+#pensamiento {
+    position: absolute; /* Permite ubicarlo encima de la imagen. */
+
+    top: 65%; /* Distancia desde la parte superior de la ilustración. */
+    left: 10%; /* Distancia desde el lado izquierdo. */
+    width: 80%; /* Ancho del recuadro. */
+
+    background-color: white; /* Fondo blanco para facilitar la lectura. */
+    border: 3px solid #9b795c; /* Borde café. */
+    padding: 8px; /* Espacio interno alrededor del texto. */
+
+    text-align: center; /* Centra el pensamiento. */
+}
+
+
+/* APARIENCIA DE LOS TEXTOS */
+
+#texto-inicio p,
+#pensamiento p {
+    margin: 0; /* Elimina el margen que tienen los párrafos por defecto. */
+
+    color: #493629; /* Color café oscuro para las letras. */
+    font-size: clamp(14px, 4vw, 18px); /* Adapta el tamaño de letra a la pantalla. */
+    font-weight: bold; /* Hace que el texto aparezca en negrita. */
+}
+
+
+/* BOTÓN COMENZAR */
+
+#boton-comenzar {
+    position: absolute; /* Permite ubicar el botón encima de la ilustración. */
+
+    top: 83%; /* Distancia desde la parte superior de la imagen. */
+    left: 25%; /* Distancia desde el lado izquierdo. */
+    width: 50%; /* Ancho del botón. */
+
+    padding: 12px 5px; /* Espacio interno del botón. */
+
+    background-color: #bd2424; /* Fondo rojo inspirado en la ilustración. */
+    border: 3px solid #791515; /* Borde rojo más oscuro. */
+    border-radius: 5px; /* Redondea ligeramente las esquinas. */
+
+    color: white; /* Color de las letras. */
+    text-align: center; /* Centra el texto del botón. */
+    text-decoration: none; /* Elimina el subrayado del enlace. */
+
+    font-size: clamp(15px, 4vw, 19px); /* Adapta el tamaño de las letras. */
+    font-weight: bold; /* Hace que COMENZAR aparezca en negrita. */
+    letter-spacing: 1px; /* Separa un poco las letras. */
+
+    box-shadow: 0 4px 0 #791515; /* Crea una sombra que simula un botón físico. */
+}
+
+
+/* CAMBIO DE COLOR CUANDO PASAMOS EL CURSOR */
+
+#boton-comenzar:hover {
+    background-color: #d63838; /* Aclara el rojo cuando el cursor está encima. */
+}
+
+
+/* EFECTO CUANDO PRESIONAMOS EL BOTÓN */
+
+#boton-comenzar:active {
+    top: 83.5%; /* Baja un poco el botón para simular que se hunde. */
+    box-shadow: 0 1px 0 #791515; /* Reduce la sombra al presionarlo. */
+}

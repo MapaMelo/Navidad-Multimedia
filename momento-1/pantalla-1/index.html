@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+
+    <!-- Permite utilizar caracteres especiales, como tildes y ñ. -->
+    <meta charset="utf-8">
+
+    <!-- Hace que la página se adapte al ancho de la pantalla del celular. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Nombre que aparece en la pestaña del navegador. -->
+    <title>Navidad - Papá Noel</title>
+
+    <!-- Conecta este HTML con el archivo de estilos CSS. -->
+    <link rel="stylesheet" href="script.css">
+
+    <!-- Conecta el JavaScript. defer hace que se ejecute después de cargar el HTML. -->
+    <script src="script.js" defer></script>
+
+</head>
+
+<body>
+
+    <!-- Contenedor principal de toda la experiencia. -->
+    <main id="contenedor-juego">
+
+        <!-- Este contenedor agrupa la imagen y los elementos que aparecen encima. -->
+        <div id="pantalla">
+
+            <!-- Imagen principal del escritorio de Papá Noel. -->
+            <img id="escritorio" src="assets/escritorio.png" alt="Escritorio de Papá Noel">
+
+            <!-- Recuadro blanco donde aparecerá el título de la escena. -->
+            <div id="texto-inicio">
+
+                <!-- El texto se carga desde datos.json mediante JavaScript. -->
+                <p id="titulo"></p>
+
+            </div>
+
+            <!-- Recuadro blanco donde aparecerá el pensamiento de Papá Noel. -->
+            <div id="pensamiento">
+
+                <!-- La narración también se carga desde datos.json. -->
+                <p id="narracion"></p>
+
+            </div>
+
+            <!-- Botón que lleva a la siguiente pantalla del juego. -->
+            <a id="boton-comenzar" href="../../momento-2/pantalla-1/index.html">
+                COMENZAR
+            </a>
+
+        </div>
+
+    </main>
+
+</body>
+</html>

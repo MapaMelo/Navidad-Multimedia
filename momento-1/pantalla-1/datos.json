@@ -1,0 +1,8 @@
+{
+    "titulo": "Navidad. 11:30 p. m.",
+    "narracion": "Otra Navidad. Otra vez lo mismo...",
+    "audio": {
+        "musica": "assets/audios/musica-navidad.mp3",
+        "reloj": "assets/audios/reloj.mp3"
+    }
+}
