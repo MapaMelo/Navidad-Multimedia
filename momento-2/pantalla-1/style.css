@@ -64,7 +64,7 @@ body {
 /* CONTADOR DE REGALOS */
 #contador {
     position: absolute;
-    top: 15%; /* Lo bajamos para que no tape el título */
+    top: 85%;
     right: 5%;
     width: 23%;
     background-color: white;
@@ -83,26 +83,22 @@ body {
 
 /* GUÍA TOUCH PROVISIONAL */
 
+/* BOTÓN TOUCH */
 #guia-touch {
     position: absolute;
-
-    /* Estas posiciones son provisionales.
-       Puedes cambiar top y left para mover la guía sobre la imagen. */
     top: 45%;
     left: 10%;
-
     width: 25%;
     padding: 8px;
-
     background-color: white;
     border: 3px solid #bd2424;
     border-radius: 8px;
-
     text-align: center;
+    text-decoration: none;
     box-shadow: 0 4px 0 #791515;
 }
 
-/* Texto TOUCH. */
+/* TEXTO DEL BOTÓN */
 #guia-touch p {
     margin: 3px 0;
     color: #bd2424;
@@ -110,25 +106,7 @@ body {
     font-weight: bold;
 }
 
-/* Instrucción que aparece debajo de TOUCH. */
 #guia-touch #instruccion-touch {
     color: #493629;
     font-size: clamp(9px, 2.5vw, 12px);
-}
-
-
-/* ZONA INTERACTIVA DE LOS REGALOS */
-
-#zona-regalos {
-    position: absolute;
-
-    /* Ubicación provisional: la ajustaremos sobre los regalos reales. */
-    top: 55%;
-    left: 15%;
-    width: 70%;
-    height: 35%;
-
-    /* Color provisional para poder visualizar el área interactiva. */
-    background-color: rgba(255, 0, 0, 0.15);
-    border: 2px dashed red;
 }
