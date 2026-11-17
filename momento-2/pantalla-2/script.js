@@ -7,18 +7,30 @@ async function cargarDatos() {
     let respuesta = await fetch("datos.json");
     let datos = await respuesta.json();
 
-    // MOSTRAR EL TEXTO
+    // MOSTRAR EL TEXTO INICIAL
     narracion.textContent = datos.narracion;
 }
 
-// FUNCIÓN PARA GUARDAR EL JUGUETE Y PASAR A LA SIGUIENTE PANTALLA
+// FUNCIÓN PARA SELECCIONAR UN JUGUETE
 function seleccionarJuguete(juguete) {
 
-    // GUARDAR EL JUGUETE SELECCIONADO
-    localStorage.setItem("jugueteSeleccionado", juguete);
+    // RECUPERAR LA LISTA DE JUGUETES TERMINADOS
+    let juguetesTerminados = JSON.parse(localStorage.getItem("juguetesTerminados")) || [];
 
-    // IR A LA PANTALLA DE SELECCIÓN DE PAPEL
-    window.location.href = "../pantalla-3/papeles.html";
+    // REVISAR SI EL JUGUETE YA FUE UTILIZADO
+    if (juguetesTerminados.includes(juguete)) {
+
+        // MOSTRAR EL COMENTARIO DE PAPÁ NOEL
+        narracion.textContent = "¿Otra vez ese? ¡Ya lo envolví! No puedo estar haciendo lo mismo dos veces...";
+
+    } else {
+
+        // GUARDAR EL JUGUETE SELECCIONADO
+        localStorage.setItem("jugueteSeleccionado", juguete);
+
+        // IR A LA PANTALLA DE SELECCIÓN DE PAPEL
+        window.location.href = "../pantalla-3/papeles.html";
+    }
 }
 
 // INTERACCIÓN: MATRIUSHKAS
@@ -53,4 +65,3 @@ document.getElementById("zona-muneca").onclick = function() {
 
 // INICIAR PANTALLA
 cargarDatos();
-S
