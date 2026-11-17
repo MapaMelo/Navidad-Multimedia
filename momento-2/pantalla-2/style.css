@@ -94,10 +94,10 @@ body {
 /* JUGUETE 6: BALÓN */
 #zona-balon {
     position: absolute;
-    top: 46%;
+    top: 50%;
     left: 33%;
-    width: 31%;
-    height: 14%;
+    width: 35%;
+    height: 18%;
 }
 
 /* JUGUETE 5: MUÑECA */
