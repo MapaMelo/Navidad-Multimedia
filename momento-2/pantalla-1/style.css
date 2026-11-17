@@ -62,18 +62,14 @@ body {
 
 
 /* CONTADOR DE REGALOS */
-
 #contador {
     position: absolute;
-
-    top: 5%;
+    top: 15%; /* Lo bajamos para que no tape el título */
     right: 5%;
     width: 23%;
-
     background-color: white;
     border: 3px solid #9b795c;
     padding: 5px;
-
     text-align: center;
 }
 
@@ -127,10 +123,10 @@ body {
     position: absolute;
 
     /* Ubicación provisional: la ajustaremos sobre los regalos reales. */
-    top: 35%;
+    top: 55%;
     left: 15%;
     width: 70%;
-    height: 40%;
+    height: 35%;
 
     /* Color provisional para poder visualizar el área interactiva. */
     background-color: rgba(255, 0, 0, 0.15);
