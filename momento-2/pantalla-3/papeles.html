@@ -1,0 +1,48 @@
+
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Elegir papel - Papá Noel</title>
+
+    <!-- CONECTAR CSS Y JAVASCRIPT -->
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+    <main id="contenedor-juego">
+
+        <div id="pantalla">
+
+            <!-- IMAGEN CON LAS TRES OPCIONES DE PAPEL -->
+            <img id="papeles" src="assets/papel.jpg" alt="Tres opciones de papel de regalo">
+
+            <!-- PENSAMIENTO DE PAPÁ NOEL -->
+            <div id="texto-papeles">
+                <p id="narracion"></p>
+            </div>
+
+            <!-- GUÍA PARA INDICAR QUE DEBE TOCAR UNA OPCIÓN -->
+            <div id="guia-touch">
+                <p>TOUCH</p>
+                <p>Elige un papel</p>
+            </div>
+
+            <!-- ZONAS INTERACTIVAS INVISIBLES -->
+
+            <!-- OPCIÓN 1: PAPEL IZQUIERDO -->
+            <div id="zona-papel-1"></div>
+
+            <!-- OPCIÓN 2: PAPEL DEL CENTRO -->
+            <div id="zona-papel-2"></div>
+
+            <!-- OPCIÓN 3: PAPEL DERECHO -->
+            <div id="zona-papel-3"></div>
+
+        </div>
+
+    </main>
+</body>
+</html>
