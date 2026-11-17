@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+
+    <!-- Permite utilizar tildes y caracteres especiales. -->
+    <meta charset="utf-8">
+
+    <!-- Adapta la página al tamaño de la pantalla del celular. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Nombre de la pantalla. -->
+    <title>Mesa de trabajo - Papá Noel</title>
+
+    <!-- Conecta el archivo de estilos. -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Conecta JavaScript y espera a que cargue el HTML. -->
+    <script src="script.js" defer></script>
+
+</head>
+
+<body>
+
+    <!-- Contenedor principal del juego. -->
+    <main id="contenedor-juego">
+
+        <!-- Contenedor de la ilustración y los elementos superpuestos. -->
+        <div id="pantalla">
+
+            <!-- Imagen de la mesa de trabajo. -->
+            <img id="mesa-trabajo" src="assets/mesa-trabajo.jpg" alt="Mesa de trabajo de Papá Noel">
+
+            <!-- Recuadro con la instrucción de Papá Noel. -->
+            <div id="texto-inicio">
+                <p id="titulo"></p>
+            </div>
+
+            <!-- Contador de regalos terminados. -->
+            <div id="contador">
+                <p>REGALOS</p>
+                <p id="cantidad-regalos">0/6</p>
+            </div>
+
+            <!-- Guía visual provisional para indicar dónde tocar. -->
+            <div id="guia-touch">
+                <p>TOUCH</p>
+                <p id="instruccion-touch">Toca aquí</p>
+            </div>
+
+            <!-- Zona interactiva sobre los regalos de la mesa. -->
+            <!-- Por ahora el enlace lleva a la estantería, que construiremos después. -->
+            <a id="zona-regalos" href="../pantalla-2/estanteria.html" aria-label="Ir a la estantería"></a>
+
+        </div>
+
+    </main>
+
+</body>
+</html>

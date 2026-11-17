@@ -1,0 +1,138 @@
+/* CONFIGURACIÓN GENERAL */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background-color: #252525;
+    font-family: Arial, sans-serif;
+}
+
+
+/* CONTENEDOR DEL JUEGO */
+
+#contenedor-juego {
+    width: 100%;
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* IMAGEN Y ELEMENTOS SUPERPUESTOS */
+
+#pantalla {
+    width: min(100vw, 430px, 56.25vh);
+    position: relative;
+}
+
+#mesa-trabajo {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+
+/* TEXTO PRINCIPAL */
+
+#texto-inicio {
+    position: absolute;
+
+    top: 5%;
+    left: 8%;
+    width: 84%;
+
+    background-color: white;
+    border: 3px solid #9b795c;
+    padding: 8px;
+
+    text-align: center;
+}
+
+#texto-inicio p {
+    margin: 0;
+    color: #493629;
+    font-size: clamp(14px, 4vw, 18px);
+    font-weight: bold;
+}
+
+
+/* CONTADOR DE REGALOS */
+
+#contador {
+    position: absolute;
+
+    top: 5%;
+    right: 5%;
+    width: 23%;
+
+    background-color: white;
+    border: 3px solid #9b795c;
+    padding: 5px;
+
+    text-align: center;
+}
+
+#contador p {
+    margin: 2px 0;
+    color: #493629;
+    font-size: clamp(10px, 3vw, 14px);
+    font-weight: bold;
+}
+
+
+/* GUÍA TOUCH PROVISIONAL */
+
+#guia-touch {
+    position: absolute;
+
+    /* Estas posiciones son provisionales.
+       Puedes cambiar top y left para mover la guía sobre la imagen. */
+    top: 45%;
+    left: 10%;
+
+    width: 25%;
+    padding: 8px;
+
+    background-color: white;
+    border: 3px solid #bd2424;
+    border-radius: 8px;
+
+    text-align: center;
+    box-shadow: 0 4px 0 #791515;
+}
+
+/* Texto TOUCH. */
+#guia-touch p {
+    margin: 3px 0;
+    color: #bd2424;
+    font-size: clamp(13px, 4vw, 18px);
+    font-weight: bold;
+}
+
+/* Instrucción que aparece debajo de TOUCH. */
+#guia-touch #instruccion-touch {
+    color: #493629;
+    font-size: clamp(9px, 2.5vw, 12px);
+}
+
+
+/* ZONA INTERACTIVA DE LOS REGALOS */
+
+#zona-regalos {
+    position: absolute;
+
+    /* Ubicación provisional: la ajustaremos sobre los regalos reales. */
+    top: 35%;
+    left: 15%;
+    width: 70%;
+    height: 40%;
+
+    /* Color provisional para poder visualizar el área interactiva. */
+    background-color: rgba(255, 0, 0, 0.15);
+    border: 2px dashed red;
+}
