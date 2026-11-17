@@ -1,0 +1,110 @@
+
+/* CONFIGURACIÓN GENERAL */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background-color: #252525;
+    font-family: Arial, sans-serif;
+}
+
+/* CENTRAR LA PANTALLA */
+#contenedor-juego {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* CONTENEDOR DE LA IMAGEN */
+#pantalla {
+    width: min(100vw, 430px, 45.3vh);
+    position: relative;
+}
+
+/* IMAGEN DE LA ESTANTERÍA */
+#estante {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* TEXTO INFERIOR */
+#texto-estanteria {
+    position: absolute;
+    top: 82%;
+    left: 7%;
+    width: 86%;
+    background-color: white;
+    border: 3px solid #9b795c;
+    padding: 10px;
+    text-align: center;
+}
+
+/* ESTILO DEL TEXTO */
+#texto-estanteria p {
+    margin: 0;
+    color: #493629;
+    font-size: clamp(13px, 3.5vw, 17px);
+    font-weight: bold;
+}
+
+/* ZONAS INTERACTIVAS */
+/* Todas son invisibles y están encima de los juguetes */
+
+/* JUGUETE 1: MATRIUSHKAS */
+#zona-matriushkas {
+    position: absolute;
+    top: 21%;
+    left: 2%;
+    width: 37%;
+    height: 14%;
+}
+
+/* JUGUETE 2: ROBOT */
+#zona-robot {
+    position: absolute;
+    top: 19%;
+    left: 41%;
+    width: 20%;
+    height: 16%;
+}
+
+/* JUGUETE 3: LIBROS */
+#zona-libros {
+    position: absolute;
+    top: 18%;
+    left: 61%;
+    width: 37%;
+    height: 17%;
+}
+
+/* JUGUETE 4: OSO */
+#zona-oso {
+    position: absolute;
+    top: 38%;
+    left: 8%;
+    width: 23%;
+    height: 12%;
+}
+
+/* JUGUETE 6: BALÓN */
+#zona-balon {
+    position: absolute;
+    top: 45%;
+    left: 34%;
+    width: 27%;
+    height: 12%;
+}
+
+/* JUGUETE 5: MUÑECA */
+#zona-muneca {
+    position: absolute;
+    top: 38%;
+    left: 60%;
+    width: 37%;
+    height: 20%;
+}
