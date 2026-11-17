@@ -35,12 +35,12 @@ body {
 /* TEXTO INFERIOR */
 #texto-estanteria {
     position: absolute;
-    top: 82%;
-    left: 7%;
-    width: 86%;
+    top: 84%; /* Lo bajamos un poquito */
+    left: 12%;
+    width: 76%; /* Reducimos el ancho */
     background-color: white;
     border: 3px solid #9b795c;
-    padding: 10px;
+    padding: 7px; /* Reducimos el espacio interior */
     text-align: center;
 }
 
@@ -48,7 +48,7 @@ body {
 #texto-estanteria p {
     margin: 0;
     color: #493629;
-    font-size: clamp(13px, 3.5vw, 17px);
+    font-size: clamp(12px, 3vw, 15px); /* Letra un poquito más pequeña */
     font-weight: bold;
 }
 
@@ -85,26 +85,26 @@ body {
 /* JUGUETE 4: OSO */
 #zona-oso {
     position: absolute;
-    top: 38%;
-    left: 8%;
-    width: 23%;
-    height: 12%;
+    top: 40%;
+    left: 5%;
+    width: 29%;
+    height: 15%;
 }
 
 /* JUGUETE 6: BALÓN */
 #zona-balon {
     position: absolute;
-    top: 45%;
-    left: 34%;
-    width: 27%;
-    height: 12%;
+    top: 46%;
+    left: 33%;
+    width: 31%;
+    height: 14%;
 }
 
 /* JUGUETE 5: MUÑECA */
 #zona-muneca {
     position: absolute;
-    top: 38%;
-    left: 60%;
+    top: 40%;
+    left: 61%;
     width: 37%;
-    height: 20%;
+    height: 22%;
 }
