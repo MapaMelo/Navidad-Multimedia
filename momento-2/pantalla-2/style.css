@@ -1,5 +1,5 @@
-
 /* CONFIGURACIÓN GENERAL */
+
 * {
     box-sizing: border-box;
 }
@@ -10,7 +10,9 @@ body {
     font-family: Arial, sans-serif;
 }
 
+
 /* CENTRAR LA PANTALLA */
+
 #contenedor-juego {
     width: 100%;
     min-height: 100vh;
@@ -19,52 +21,67 @@ body {
     align-items: center;
 }
 
+
 /* CONTENEDOR DE LA IMAGEN */
+
 #pantalla {
-    width: min(100vw, 430px, 45.3vh);
+    /* Mismo tamaño máximo que la mesa de trabajo. */
+    width: min(100vw, 430px, 56.25vh);
     position: relative;
 }
 
+
 /* IMAGEN DE LA ESTANTERÍA */
+
 #estante {
     width: 100%;
     height: auto;
     display: block;
 }
 
+
 /* TEXTO INFERIOR */
+
 #texto-estanteria {
     position: absolute;
-    top: 84%; /* Lo bajamos un poquito */
+    top: 84%;
     left: 12%;
-    width: 76%; /* Reducimos el ancho */
+    width: 76%;
+
     background-color: white;
     border: 3px solid #9b795c;
-    padding: 7px; /* Reducimos el espacio interior */
+    padding: 7px;
+
     text-align: center;
 }
 
+
 /* ESTILO DEL TEXTO */
+
 #texto-estanteria p {
     margin: 0;
     color: #493629;
-    font-size: clamp(12px, 3vw, 15px); /* Letra un poquito más pequeña */
+    font-size: clamp(12px, 3vw, 15px);
     font-weight: bold;
 }
 
+
 /* ZONAS INTERACTIVAS */
-/* Todas son invisibles y están encima de los juguetes */
+/* Todas son invisibles y están encima de los juguetes. */
 
 /* JUGUETE 1: MATRIUSHKAS */
+
 #zona-matriushkas {
     position: absolute;
-    top: 21%;
+    top: 24%;
     left: 2%;
     width: 37%;
     height: 14%;
 }
 
+
 /* JUGUETE 2: ROBOT */
+
 #zona-robot {
     position: absolute;
     top: 19%;
@@ -73,7 +90,9 @@ body {
     height: 16%;
 }
 
+
 /* JUGUETE 3: LIBROS */
+
 #zona-libros {
     position: absolute;
     top: 18%;
@@ -82,7 +101,9 @@ body {
     height: 17%;
 }
 
+
 /* JUGUETE 4: OSO */
+
 #zona-oso {
     position: absolute;
     top: 46%;
@@ -91,7 +112,9 @@ body {
     height: 18%;
 }
 
+
 /* JUGUETE 6: BALÓN */
+
 #zona-balon {
     position: absolute;
     top: 50%;
@@ -100,7 +123,9 @@ body {
     height: 18%;
 }
 
+
 /* JUGUETE 5: MUÑECA */
+
 #zona-muneca {
     position: absolute;
     top: 40%;

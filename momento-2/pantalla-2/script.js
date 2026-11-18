@@ -15,8 +15,23 @@ async function cargarDatos() {
     // Convierte su contenido para utilizarlo en JavaScript.
     let datos = await respuesta.json();
 
-    // Muestra el texto inicial.
-    narracion.textContent = datos.narracion;
+    // Recupera la lista de juguetes que ya se terminaron.
+    let juguetesTerminados = JSON.parse(localStorage.getItem("juguetesTerminados")) || [];
+
+    // Cuenta cuántos regalos se han terminado.
+    let cantidad = juguetesTerminados.length;
+
+    // Muestra un texto diferente según el progreso.
+    if (cantidad >= 2) {
+
+        // Comentario que aparece cuando va a preparar el tercer regalo.
+        narracion.textContent = datos.narracionAvanzada;
+
+    } else {
+
+        // Comentario de la primera y segunda visita.
+        narracion.textContent = datos.narracionInicial;
+    }
 
 }
 
