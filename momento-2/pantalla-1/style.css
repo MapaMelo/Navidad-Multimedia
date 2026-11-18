@@ -62,14 +62,17 @@ body {
 
 
 /* CONTADOR DE REGALOS */
+
 #contador {
     position: absolute;
     top: 85%;
     right: 5%;
     width: 23%;
+
     background-color: white;
     border: 3px solid #9b795c;
     padding: 5px;
+
     text-align: center;
 }
 
@@ -81,32 +84,38 @@ body {
 }
 
 
-/* GUÍA TOUCH PROVISIONAL */
-
 /* BOTÓN TOUCH */
-#guia-touch {
+
+#zona-regalos {
     position: absolute;
+
     top: 45%;
     left: 10%;
     width: 25%;
+
     padding: 8px;
+
     background-color: white;
     border: 3px solid #bd2424;
     border-radius: 8px;
+
     text-align: center;
     text-decoration: none;
+
     box-shadow: 0 4px 0 #791515;
 }
 
+
 /* TEXTO DEL BOTÓN */
-#guia-touch p {
+
+#zona-regalos p {
     margin: 3px 0;
     color: #bd2424;
     font-size: clamp(13px, 4vw, 18px);
     font-weight: bold;
 }
 
-#guia-touch #instruccion-touch {
+#zona-regalos p:last-child {
     color: #493629;
     font-size: clamp(9px, 2.5vw, 12px);
 }
