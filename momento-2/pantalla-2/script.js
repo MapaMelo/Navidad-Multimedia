@@ -1,67 +1,81 @@
-
 // ELEMENTOS DE LA PANTALLA
+
+// Busca el espacio donde aparecerán los pensamientos de Papá Noel.
 let narracion = document.getElementById("narracion");
 
+
 // FUNCIÓN PARA CARGAR LOS DATOS
+
+// Carga la información guardada en datos.json.
 async function cargarDatos() {
+
+    // Busca el archivo JSON.
     let respuesta = await fetch("datos.json");
+
+    // Convierte su contenido para utilizarlo en JavaScript.
     let datos = await respuesta.json();
 
-    // MOSTRAR EL TEXTO INICIAL
+    // Muestra el texto inicial.
     narracion.textContent = datos.narracion;
+
 }
 
+
 // FUNCIÓN PARA SELECCIONAR UN JUGUETE
+
 function seleccionarJuguete(juguete) {
 
-    // RECUPERAR LA LISTA DE JUGUETES TERMINADOS
+    // Recupera la lista de juguetes que ya se terminaron.
     let juguetesTerminados = JSON.parse(localStorage.getItem("juguetesTerminados")) || [];
 
-    // REVISAR SI EL JUGUETE YA FUE UTILIZADO
+    // Revisa si el juguete ya fue utilizado.
     if (juguetesTerminados.includes(juguete)) {
 
-        // MOSTRAR EL COMENTARIO DE PAPÁ NOEL
+        // Muestra el comentario de Papá Noel.
         narracion.textContent = "¿Otra vez ese? ¡Ya lo envolví! No puedo estar haciendo lo mismo dos veces...";
 
     } else {
 
-        // GUARDAR EL JUGUETE SELECCIONADO
+        // Guarda el juguete seleccionado.
         localStorage.setItem("jugueteSeleccionado", juguete);
 
-        // IR A LA PANTALLA DE SELECCIÓN DE PAPEL
+        // Va a la pantalla de selección de papel.
         window.location.href = "../pantalla-3/papeles.html";
     }
+
 }
 
-// INTERACCIÓN: MATRIUSHKAS
+
+// INTERACCIONES CON LOS JUGUETES
+
+// Cada zona permite seleccionar un juguete.
+
 document.getElementById("zona-matriushkas").onclick = function() {
     seleccionarJuguete("matriushkas");
 };
 
-// INTERACCIÓN: ROBOT
 document.getElementById("zona-robot").onclick = function() {
     seleccionarJuguete("robot");
 };
 
-// INTERACCIÓN: LIBROS
 document.getElementById("zona-libros").onclick = function() {
     seleccionarJuguete("libros");
 };
 
-// INTERACCIÓN: OSO
 document.getElementById("zona-oso").onclick = function() {
     seleccionarJuguete("oso");
 };
 
-// INTERACCIÓN: BALÓN
 document.getElementById("zona-balon").onclick = function() {
     seleccionarJuguete("balon");
 };
 
-// INTERACCIÓN: MUÑECA
 document.getElementById("zona-muneca").onclick = function() {
     seleccionarJuguete("muneca");
 };
 
+
 // INICIAR PANTALLA
+
+// Ejecuta la función para mostrar la información.
 cargarDatos();

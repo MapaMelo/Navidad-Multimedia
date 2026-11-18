@@ -32,9 +32,19 @@ async function cargarDatos() {
     // Si ya se terminaron los seis regalos, cambia el destino del botón.
     if (cantidad === 6) {
 
-        // IR A LA PANTALLA DEL TRINEO
-        // Aquí pondremos la ruta correcta cuando me confirmes dónde está trineo.html.
+        // IR A LA PANTALLA DEL TRINEO.
+        zonaRegalos.href = "../../momento-3/pantalla-1/trineo.html";
 
+        // Cambia el texto del botón.
+        zonaRegalos.textContent = "CONTINUAR";
+
+    } else {
+
+        // Si faltan regalos, permite volver a la estantería.
+        zonaRegalos.href = "../pantalla-2/estanteria.html";
+
+        // Mantiene el texto del botón.
+        zonaRegalos.textContent = "TOCAR PARA CONTINUAR";
     }
 
 }
