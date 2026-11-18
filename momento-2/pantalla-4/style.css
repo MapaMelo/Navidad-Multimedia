@@ -1,4 +1,3 @@
-
 /* CONFIGURACIÓN GENERAL */
 * {
     box-sizing: border-box;
@@ -21,8 +20,11 @@ body {
 
 /* CONTENEDOR DE LA IMAGEN */
 #pantalla {
-    width: min(100vw, 430px, 55.8vh);
+    width: min(100vw, 430px, 56.25vh);
     position: relative;
+
+    /* Evita que el celular interprete el gesto como zoom de la página */
+    touch-action: none;
 }
 
 /* IMAGEN DEL REGALO */
@@ -30,14 +32,13 @@ body {
     width: 100%;
     height: auto;
     display: block;
-    touch-action: none;
 }
 
 /* CONTADOR */
 #contador {
     position: absolute;
-    top: 5%;
-    right: 5%;
+    bottom: 4%;
+    left: 4%;
     width: 23%;
     background-color: white;
     border: 3px solid #9b795c;
@@ -55,9 +56,9 @@ body {
 /* PENSAMIENTO DE PAPÁ NOEL */
 #texto-envolver {
     position: absolute;
-    top: 8%;
-    left: 6%;
-    width: 65%;
+    bottom: 4%;
+    left: 30%;
+    width: 66%;
     background-color: white;
     border: 3px solid #9b795c;
     padding: 7px;
@@ -74,7 +75,7 @@ body {
 /* GUÍA DEL GESTO */
 #guia-gesto {
     position: absolute;
-    top: 80%;
+    top: 72%;
     left: 20%;
     width: 60%;
     background-color: white;
@@ -101,7 +102,7 @@ body {
 #mensaje-final {
     display: none;
     position: absolute;
-    top: 75%;
+    top: 70%;
     left: 15%;
     width: 70%;
     background-color: white;

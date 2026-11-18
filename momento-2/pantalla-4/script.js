@@ -1,5 +1,5 @@
-
 // ELEMENTOS DE LA PANTALLA
+let pantalla = document.getElementById("pantalla");
 let regalo = document.getElementById("regalo");
 let narracion = document.getElementById("narracion");
 let cantidadRegalos = document.getElementById("cantidad-regalos");
@@ -38,6 +38,7 @@ let imagenesIniciales = {
 let distanciaInicial = 0;
 let gestoCompletado = false;
 
+
 // FUNCIÓN PARA CALCULAR LA DISTANCIA ENTRE DOS DEDOS
 function calcularDistancia(dedo1, dedo2) {
 
@@ -50,6 +51,7 @@ function calcularDistancia(dedo1, dedo2) {
     );
 }
 
+
 // FUNCIÓN PARA CARGAR LA PANTALLA
 async function cargarDatos() {
 
@@ -59,26 +61,30 @@ async function cargarDatos() {
         return;
     }
 
-    // CARGAR EL PENSAMIENTO
-    let respuesta = await fetch("datos.json");
-    let datos = await respuesta.json();
+    // SI EL JUGUETE YA ESTABA TERMINADO, VOLVER A LA MESA
+    if (juguetesTerminados.includes(juguete)) {
+        window.location.href = "../pantalla-1/mesatrabajo.html";
+        return;
+    }
 
-    narracion.textContent = datos.narracion;
+    // MOSTRAR EL JUGUETE SOBRE EL PAPEL
+    // Esta instrucción se ejecuta antes de cargar el JSON.
+    regalo.src = "assets/" + imagenesIniciales[juguete];
 
     // MOSTRAR EL CONTADOR
     cantidadRegalos.textContent = juguetesTerminados.length + "/6";
 
-    // MOSTRAR EL JUGUETE SOBRE EL PAPEL
-    regalo.src = "assets/" + imagenesIniciales[juguete];
+    // CARGAR LOS DATOS DEL JSON
+    let respuesta = await fetch("datos.json");
+    let datos = await respuesta.json();
 
-    // SI YA ESTABA TERMINADO, NO PERMITIR REPETIRLO
-    if (juguetesTerminados.includes(juguete)) {
-        window.location.href = "../pantalla-1/mesatrabajo.html";
-    }
+    // MOSTRAR EL PENSAMIENTO DE PAPÁ NOEL
+    narracion.textContent = datos.narracion;
 }
 
+
 // DETECTAR CUANDO SE COLOCAN DOS DEDOS
-regalo.addEventListener("touchstart", function(event) {
+pantalla.addEventListener("touchstart", function(event) {
 
     // COMPROBAR QUE HAYA EXACTAMENTE DOS DEDOS
     if (event.touches.length === 2 && !gestoCompletado) {
@@ -92,12 +98,14 @@ regalo.addEventListener("touchstart", function(event) {
 
 }, { passive: false });
 
-// DETECTAR CUANDO LOS DEDOS SE ACERCAN
-regalo.addEventListener("touchmove", function(event) {
 
-    // EVITAR QUE LA PANTALLA SE DESPLACE
+// DETECTAR CUANDO LOS DEDOS SE ACERCAN
+pantalla.addEventListener("touchmove", function(event) {
+
+    // COMPROBAR QUE SIGAN HABIENDO DOS DEDOS
     if (event.touches.length === 2 && !gestoCompletado) {
 
+        // EVITAR QUE LA PÁGINA SE DESPLACE
         event.preventDefault();
 
         // CALCULAR LA DISTANCIA ACTUAL
@@ -115,6 +123,7 @@ regalo.addEventListener("touchmove", function(event) {
     }
 
 }, { passive: false });
+
 
 // FUNCIÓN PARA TERMINAR EL REGALO
 function terminarRegalo() {
@@ -168,23 +177,25 @@ function terminarRegalo() {
     // MOSTRAR EL MENSAJE Y EL BOTÓN
     mensajeFinal.style.display = "block";
 
-    // GUARDAR QUE YA NO HAY UNA SELECCIÓN PENDIENTE
+    // BORRAR LAS ELECCIONES QUE YA SE UTILIZARON
     localStorage.removeItem("jugueteSeleccionado");
     localStorage.removeItem("papelSeleccionado");
 }
+
 
 // BOTÓN PARA CONTINUAR
 botonContinuar.onclick = function() {
 
     // SI YA ESTÁN LOS SEIS REGALOS, IR AL TRINEO
     if (juguetesTerminados.length === 6) {
-        window.location.href = "../../momento-3/trineo.html";
+        window.location.href = "../../momento-3/pantalla-1/trineo.html";
     } else {
 
         // SI FALTAN REGALOS, VOLVER A LA MESA
         window.location.href = "../pantalla-1/mesatrabajo.html";
     }
 };
+
 
 // INICIAR PANTALLA
 cargarDatos();
