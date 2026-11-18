@@ -1,5 +1,5 @@
-
 /* CONFIGURACIÓN GENERAL */
+
 * {
     box-sizing: border-box;
 }
@@ -10,7 +10,9 @@ body {
     font-family: Arial, sans-serif;
 }
 
+
 /* CENTRAR LA PANTALLA */
+
 #contenedor-juego {
     width: 100%;
     min-height: 100vh;
@@ -19,32 +21,42 @@ body {
     align-items: center;
 }
 
+
 /* CONTENEDOR DE LA IMAGEN */
+
 #pantalla {
-    width: min(100vw, 430px, 55.8vh);
+    width: min(100vw, 430px, 56.25vh);
     position: relative;
 }
 
+
 /* IMAGEN DE LOS PAPELES */
+
 #papeles {
     width: 100%;
     height: auto;
     display: block;
 }
 
+
 /* TEXTO DE PAPÁ NOEL */
+
 #texto-papeles {
     position: absolute;
     top: 83%;
     left: 8%;
     width: 84%;
+
     background-color: white;
     border: 3px solid #9b795c;
     padding: 7px;
+
     text-align: center;
 }
 
+
 /* ESTILO DEL TEXTO */
+
 #texto-papeles p {
     margin: 0;
     color: #493629;
@@ -52,36 +64,12 @@ body {
     font-weight: bold;
 }
 
-/* GUÍA TOUCH */
-#guia-touch {
-    position: absolute;
-    top: 91%;
-    left: 35%;
-    width: 30%;
-    padding: 5px;
-    background-color: white;
-    border: 3px solid #bd2424;
-    border-radius: 8px;
-    text-align: center;
-    box-shadow: 0 3px 0 #791515;
-}
-
-/* TEXTO DE LA GUÍA */
-#guia-touch p {
-    margin: 2px 0;
-    color: #bd2424;
-    font-size: clamp(12px, 3.5vw, 16px);
-    font-weight: bold;
-}
-
-#guia-touch p:last-child {
-    color: #493629;
-    font-size: clamp(8px, 2.5vw, 11px);
-}
 
 /* ZONAS INTERACTIVAS INVISIBLES */
 
+
 /* PAPEL 1: IZQUIERDA */
+
 #zona-papel-1 {
     position: absolute;
     top: 35%;
@@ -90,7 +78,9 @@ body {
     height: 34%;
 }
 
+
 /* PAPEL 2: CENTRO */
+
 #zona-papel-2 {
     position: absolute;
     top: 34%;
@@ -99,7 +89,9 @@ body {
     height: 35%;
 }
 
+
 /* PAPEL 3: DERECHA */
+
 #zona-papel-3 {
     position: absolute;
     top: 35%;

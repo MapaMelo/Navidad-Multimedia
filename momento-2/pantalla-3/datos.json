@@ -1,4 +1,10 @@
-
 {
-    "narracion": "¿Otro juguete? ¿Es que nunca tienen suficientes?"
+    "narraciones": [
+        "Bueno... al menos puedo escoger el papel.",
+        "Uno menos. Todavía faltan demasiados.",
+        "¿Otro juguete? ¿Es que nunca tienen suficientes?",
+        "Empiezo a odiar todos estos papelitos...",
+        "¿Quién inventó la tradición de envolver regalos?",
+        "Último. Que nadie me vuelva a pedir esto."
+    ]
 }
