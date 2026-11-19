@@ -1,4 +1,5 @@
 /* CONFIGURACIÓN GENERAL */
+
 * {
     box-sizing: border-box;
 }
@@ -7,12 +8,11 @@ body {
     margin: 0;
     background-color: #252525;
     font-family: Arial, sans-serif;
-
-    /* Evita que el celular interprete los toques como desplazamiento */
     touch-action: none;
 }
 
 /* CENTRAR LA PANTALLA */
+
 #contenedor-juego {
     width: 100%;
     min-height: 100vh;
@@ -22,19 +22,32 @@ body {
 }
 
 /* CONTENEDOR DE LA IMAGEN */
+
 #pantalla {
     width: min(100vw, 430px, 56.25vh);
     position: relative;
 }
 
 /* IMAGEN DEL TRINEO */
+
 #trineo {
     width: 100%;
     height: auto;
     display: block;
+
+    /* Evitar que el celular abra opciones al mantener presionada la imagen */
+    -webkit-touch-callout: none;
+
+    /* Evitar seleccionar la imagen */
+    -webkit-user-select: none;
+    user-select: none;
+
+    /* Evitar arrastrar la imagen */
+    -webkit-user-drag: none;
 }
 
 /* PENSAMIENTO DE PAPÁ NOEL */
+
 #texto-trineo {
     position: absolute;
     top: 5%;
@@ -54,6 +67,7 @@ body {
 }
 
 /* GUÍA DEL GESTO */
+
 #guia-gesto {
     position: absolute;
     bottom: 7%;
@@ -75,6 +89,7 @@ body {
 }
 
 /* BOTÓN PARA CONTINUAR */
+
 #boton-vamos {
     display: none;
     position: absolute;

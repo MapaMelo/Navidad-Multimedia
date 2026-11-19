@@ -7,6 +7,13 @@ let guiaGesto = document.getElementById("guia-gesto");
 let botonVamos = document.getElementById("boton-vamos");
 
 
+// EVITAR QUE EL CELULAR ABRA EL MENÚ DE LA IMAGEN
+
+trineo.oncontextmenu = function(event) {
+    event.preventDefault();
+};
+
+
 // VARIABLES DE LA INTERACCIÓN
 
 // Guarda la cantidad de dedos apoyados.
@@ -89,6 +96,7 @@ function actualizarPantalla(cantidad) {
     } else {
 
         // COMPROBAR SI EL USUARIO HABÍA APOYADO LOS CINCO DEDOS
+
         if (temporizador !== null) {
 
             // Aumentar la cantidad de intentos fallidos.
@@ -108,6 +116,7 @@ function actualizarPantalla(cantidad) {
         }
 
         // REINICIAR EL TEMPORIZADOR
+
         clearInterval(temporizador);
 
         temporizador = null;
