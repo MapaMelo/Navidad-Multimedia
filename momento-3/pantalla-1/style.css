@@ -16,7 +16,7 @@ body {
     -webkit-user-select: none;
     user-select: none;
 
-    /* Evitar el menú de pulsación larga en celulares */
+    /* Evitar el menú de pulsación larga */
     -webkit-touch-callout: none;
 }
 
@@ -30,28 +30,38 @@ body {
     align-items: center;
 }
 
-/* CONTENEDOR DE LA IMAGEN */
+/* CONTENEDOR DE TODA LA ESCENA */
 
 #pantalla {
     width: min(100vw, 430px, 56.25vh);
     position: relative;
+
+    /* Mantener la proporción vertical de las imágenes */
+    aspect-ratio: 9 / 16;
 }
 
-/* IMAGEN DEL TRINEO */
+/* FONDO DEL TRINEO */
 
 #trineo {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    height: auto;
-    display: block;
+    height: 100%;
 
-    /* Evitar guardar, copiar o arrastrar la imagen */
+    /* Mostrar la imagen inicial */
+    background-image: url("assets/dedos0.jpg");
+
+    /* Ajustar la imagen al tamaño de la pantalla */
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    /* Evitar interacciones directas con el fondo */
+    pointer-events: none;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     user-select: none;
-    -webkit-user-drag: none;
-
-    /* La imagen no recibe directamente los toques */
-    pointer-events: none;
 }
 
 /* PENSAMIENTO DE PAPÁ NOEL */

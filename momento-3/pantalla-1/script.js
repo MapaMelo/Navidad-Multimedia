@@ -11,7 +11,7 @@ let botonVamos = document.getElementById("boton-vamos");
 
 document.addEventListener("contextmenu", function(event) {
 
-    // Impedir que aparezcan las opciones de copiar, guardar o compartir.
+    // Impedir que aparezcan las opciones del navegador.
     event.preventDefault();
 
 });
@@ -65,12 +65,12 @@ function actualizarPantalla(cantidad) {
     // Guarda la cantidad actual de dedos.
     cantidadDedos = cantidad;
 
-    // CAMBIAR LA IMAGEN SEGÚN LOS DEDOS APOYADOS
+    // CAMBIAR EL FONDO SEGÚN LOS DEDOS APOYADOS
 
     if (cantidadDedos === 0) {
-        trineo.src = "assets/dedos0.jpg";
+        trineo.style.backgroundImage = "url('assets/dedos0.jpg')";
     } else {
-        trineo.src = "assets/dedo" + cantidadDedos + ".jpg";
+        trineo.style.backgroundImage = "url('assets/dedo" + cantidadDedos + ".jpg')";
     }
 
     // ACTUALIZAR EL PENSAMIENTO DE PAPÁ NOEL
