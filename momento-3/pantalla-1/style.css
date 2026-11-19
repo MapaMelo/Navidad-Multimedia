@@ -8,7 +8,16 @@ body {
     margin: 0;
     background-color: #252525;
     font-family: Arial, sans-serif;
+
+    /* Evitar gestos del navegador que interfieran con el juego */
     touch-action: none;
+
+    /* Evitar seleccionar elementos */
+    -webkit-user-select: none;
+    user-select: none;
+
+    /* Evitar el menú de pulsación larga en celulares */
+    -webkit-touch-callout: none;
 }
 
 /* CENTRAR LA PANTALLA */
@@ -35,15 +44,14 @@ body {
     height: auto;
     display: block;
 
-    /* Evitar que el celular abra opciones al mantener presionada la imagen */
+    /* Evitar guardar, copiar o arrastrar la imagen */
     -webkit-touch-callout: none;
-
-    /* Evitar seleccionar la imagen */
     -webkit-user-select: none;
     user-select: none;
-
-    /* Evitar arrastrar la imagen */
     -webkit-user-drag: none;
+
+    /* La imagen no recibe directamente los toques */
+    pointer-events: none;
 }
 
 /* PENSAMIENTO DE PAPÁ NOEL */

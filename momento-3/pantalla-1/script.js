@@ -7,11 +7,14 @@ let guiaGesto = document.getElementById("guia-gesto");
 let botonVamos = document.getElementById("boton-vamos");
 
 
-// EVITAR QUE EL CELULAR ABRA EL MENÚ DE LA IMAGEN
+// EVITAR QUE APAREZCA EL MENÚ DEL NAVEGADOR
 
-trineo.oncontextmenu = function(event) {
+document.addEventListener("contextmenu", function(event) {
+
+    // Impedir que aparezcan las opciones de copiar, guardar o compartir.
     event.preventDefault();
-};
+
+});
 
 
 // VARIABLES DE LA INTERACCIÓN
