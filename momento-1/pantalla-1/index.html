@@ -47,9 +47,17 @@
 
             </div>
 
-            <!-- Botón que lleva a la siguiente pantalla del juego. -->
-            <a id="boton-comenzar" href="../../momento-2/pantalla-1/mesatrabajo.html">
+            <!-- BOTÓN PARA COMENZAR UNA PARTIDA NUEVA -->
+            <a id="boton-comenzar"
+               href="../../momento-2/pantalla-1/mesatrabajo.html"
+               onclick="
+                   localStorage.removeItem('juguetesTerminados');
+                   localStorage.removeItem('jugueteSeleccionado');
+                   localStorage.removeItem('papelSeleccionado');
+               ">
+
                 COMENZAR
+
             </a>
 
         </div>
