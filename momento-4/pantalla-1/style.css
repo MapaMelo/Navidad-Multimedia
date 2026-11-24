@@ -123,3 +123,9 @@ body {
     top: 47%;
     left: 73%;
 }
+
+/* PRUEBA PARA COMPROBAR SI SE CARGA EL CSS */
+
+#texto-mapa {
+    background-color: red;
+}
