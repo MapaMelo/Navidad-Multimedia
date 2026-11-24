@@ -7,14 +7,14 @@
 
 body {
     margin: 0;
-    background-color: #252525;
+    background-color: #101827;
     font-family: Arial, sans-serif;
     -webkit-user-select: none;
     user-select: none;
-    -webkit-touch-callout: none;
 }
 
-/* CENTRAR EL JUEGO */
+
+/* CONTENEDOR DEL JUEGO */
 
 #contenedor-juego {
     width: 100%;
@@ -24,12 +24,14 @@ body {
     align-items: center;
 }
 
-/* TAMAÑO DE LA PANTALLA */
+
+/* PANTALLA VERTICAL */
 
 #pantalla {
     width: min(100vw, 430px, 56.25vh);
-    position: relative;
     aspect-ratio: 9 / 16;
+    position: relative;
+    overflow: hidden;
 }
 
 
@@ -42,32 +44,32 @@ body {
     width: 100%;
     height: 100%;
 
-    background-image: url("assets/mapa.jpg");
-
-    /* Acercar el mapa para reducir los espacios vacíos. */
-    background-size: 180% 180%;
+    background-image: url("assets/mapa-vertical.png");
+    background-size: 100% 100%;
     background-position: center;
     background-repeat: no-repeat;
 }
 
 
-/* TEXTO DE PAPÁ NOEL */
+/* NARRACIÓN DE PAPÁ NOEL */
 
 #texto-mapa {
     position: absolute;
-    top: 5%;
-    left: 8%;
-    width: 84%;
-    background-color: white;
-    border: 3px solid #9b795c;
-    padding: 7px;
+    top: 4%;
+    left: 12%;
+    width: 76%;
+    background-color: #f5dfb5;
+    border: 3px solid #9b6839;
+    border-radius: 8px;
+    padding: 8px;
     text-align: center;
+    box-shadow: 0 3px 0 #704522;
 }
 
 #texto-mapa p {
     margin: 0;
-    color: #493629;
-    font-size: clamp(12px, 3vw, 15px);
+    color: #49301e;
+    font-size: clamp(13px, 3.5vw, 17px);
     font-weight: bold;
 }
 
@@ -76,56 +78,57 @@ body {
 
 .zona-pais {
     position: absolute;
-    width: 11%;
-    height: 6%;
-    cursor: pointer;
+    width: 15%;
+    height: 7%;
     border-radius: 50%;
+    cursor: pointer;
+    touch-action: manipulation;
 }
 
-/* ESTADOS UNIDOS: SE DEJA IGUAL */
+
+/* ESTADOS UNIDOS */
 
 #zona-estados-unidos {
-    top: 33%;
-    left: 12%;
+    top: 42%;
+    left: 10%;
 }
 
-/* FRANCIA: UN POCO MÁS A LA DERECHA */
+
+/* FRANCIA */
 
 #zona-francia {
-    top: 31%;
-    left: 40%;
+    top: 43%;
+    left: 47%;
 }
+
+
+/* NEPAL */
+
+#zona-nepal {
+    top: 49%;
+    left: 73%;
+}
+
 
 /* COLOMBIA */
 
 #zona-colombia {
-    top: 43%;
-    left: 22%;
+    top: 60%;
+    left: 18%;
 }
 
-/* NEPAL: UN POCO ARRIBA Y A LA DERECHA */
-
-#zona-nepal {
-    top: 32%;
-    left: 59%;
-}
 
 /* EGIPTO */
 
 #zona-egipto {
-    top: 39%;
-    left: 47%;
+    top: 54%;
+    left: 48%;
 }
+
 
 /* NUEVA ZELANDA */
 
 #zona-nueva-zelanda {
-    top: 47%;
-    left: 73%;
-}
-
-/* PRUEBA PARA COMPROBAR SI SE CARGA EL CSS */
-
-#texto-mapa {
-    background-color: red;
+    top: 72%;
+    left: 75%;
 }

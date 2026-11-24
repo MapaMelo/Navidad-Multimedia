@@ -59,3 +59,4 @@ document.getElementById("zona-nueva-zelanda").onclick = function() {
 // INICIAR LA PANTALLA
 
 cargarDatos();
+
