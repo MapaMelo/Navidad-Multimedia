@@ -74,12 +74,12 @@ let fachadas = {
         numero: 3,
         imagen: "assets/3. Estados Unidos.jpg",
         ventanas: [
-            { top: "13%", left: "13%", width: "34%", height: "18%" },
-            { top: "13%", left: "53%", width: "34%", height: "18%" },
-            { top: "35%", left: "13%", width: "34%", height: "18%" },
-            { top: "35%", left: "53%", width: "34%", height: "18%" },
-            { top: "57%", left: "13%", width: "34%", height: "18%" },
-            { top: "57%", left: "53%", width: "34%", height: "18%" }
+            { top: "15.55%", left: "21.79%", width: "16.9%", height: "87,9%" },
+            { top: "15.5%", left: "62.73%", width: "16.55%", height: "7,94%" },
+            { top: "35.9%", left: "21.6%", width: "17.1%", height: "7,94%" },
+            { top: "36%", left: "62.75%", width: "16.9%", height: "7,98%" },
+            { top: "57%", width: "17.1%", height: "7,94%" },
+            { top: "58.6%", left: "70.2%", width: "12.8%", height: "7,94%" }
         ]
     },
 
