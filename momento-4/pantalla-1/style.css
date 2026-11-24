@@ -32,6 +32,7 @@ body {
     aspect-ratio: 9 / 16;
 }
 
+
 /* IMAGEN DEL MAPA */
 
 #mapa {
@@ -40,11 +41,15 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
+
     background-image: url("assets/mapa.jpg");
-    background-size: 100% 100%;
+
+    /* Acercar el mapa para reducir los espacios vacíos. */
+    background-size: 180% 180%;
     background-position: center;
     background-repeat: no-repeat;
 }
+
 
 /* TEXTO DE PAPÁ NOEL */
 
@@ -66,6 +71,7 @@ body {
     font-weight: bold;
 }
 
+
 /* ZONAS TÁCTILES DE LOS PAÍSES */
 
 .zona-pais {
@@ -76,44 +82,44 @@ body {
     border-radius: 50%;
 }
 
-/* ESTADOS UNIDOS */
+/* ESTADOS UNIDOS: SE DEJA IGUAL */
 
 #zona-estados-unidos {
     top: 33%;
     left: 12%;
 }
 
-/* FRANCIA */
+/* FRANCIA: UN POCO MÁS A LA DERECHA */
 
 #zona-francia {
     top: 31%;
-    left: 37%;
+    left: 40%;
 }
 
 /* COLOMBIA */
 
 #zona-colombia {
-    top: 41%;
-    left: 18%;
+    top: 43%;
+    left: 22%;
 }
 
-/* NEPAL */
+/* NEPAL: UN POCO ARRIBA Y A LA DERECHA */
 
 #zona-nepal {
-    top: 34%;
-    left: 55%;
+    top: 32%;
+    left: 59%;
 }
 
 /* EGIPTO */
 
 #zona-egipto {
-    top: 38%;
-    left: 40%;
+    top: 39%;
+    left: 47%;
 }
 
 /* NUEVA ZELANDA */
 
 #zona-nueva-zelanda {
-    top: 46%;
-    left: 69%;
+    top: 47%;
+    left: 73%;
 }
