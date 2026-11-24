@@ -78,8 +78,8 @@ body {
 
 .zona-pais {
     position: absolute;
-    width: 15%;
-    height: 7%;
+    width: 19%;
+    height: 10%;
     border-radius: 50%;
     cursor: pointer;
     touch-action: manipulation;
@@ -89,46 +89,46 @@ body {
 /* ESTADOS UNIDOS */
 
 #zona-estados-unidos {
-    top: 42%;
-    left: 10%;
+    top: 40%;
+    left: 8%;
 }
 
 
 /* FRANCIA */
 
 #zona-francia {
-    top: 43%;
-    left: 47%;
+    top: 41%;
+    left: 45%;
 }
 
 
 /* NEPAL */
 
 #zona-nepal {
-    top: 49%;
-    left: 73%;
+    top: 47%;
+    left: 71%;
 }
 
 
 /* COLOMBIA */
 
 #zona-colombia {
-    top: 60%;
-    left: 18%;
+    top: 58%;
+    left: 16%;
 }
 
 
 /* EGIPTO */
 
 #zona-egipto {
-    top: 54%;
-    left: 48%;
+    top: 52%;
+    left: 46%;
 }
 
 
 /* NUEVA ZELANDA */
 
 #zona-nueva-zelanda {
-    top: 72%;
-    left: 75%;
+    top: 70%;
+    left: 73%;
 }
