@@ -1,0 +1,95 @@
+
+{
+    "narracionInicial": "Seis ventanas. Vamos a acabar con esto.",
+    "instruccionInicial": "Toca dos veces una ventana para seleccionarla.",
+
+    "narracionSeleccion": "Bueno... vamos con esa ventana.",
+    "instruccionSeleccion": "Desliza el regalo hacia la ventana.",
+
+    "narracionPrimeraEntrega": "¡Uno menos! ¡Vamos bien!",
+    "narracionUltimaEntrega": "¡POR FIN! ¡Se acabó!",
+
+    "fallos": [
+        "¡Pero qué fue eso! ¡Inténtalo otra vez!",
+        "¡Un poquito más de fuerza! ¡No tengo toda la noche!",
+        "¡¿En serio?! ¡Concéntrate!"
+    ],
+
+    "escenasPorVentana": {
+        "1.1": "navidad",
+        "2.1": "navidad",
+        "3.1": "navidad",
+        "4.1": "navidad",
+        "5.1": "navidad",
+        "6.2": "navidad",
+
+        "1.2": "durmiendo",
+        "2.2": "durmiendo",
+        "3.3": "durmiendo",
+        "4.2": "durmiendo",
+        "5.2": "durmiendo",
+        "6.3": "durmiendo",
+
+        "1.3": "perro",
+        "2.3": "perro",
+        "3.4": "perro",
+        "4.3": "perro",
+        "5.3": "perro",
+        "6.4": "perro",
+
+        "1.4": "descubrimiento",
+        "2.4": "descubrimiento",
+        "3.6": "descubrimiento",
+        "4.6": "descubrimiento",
+        "5.4": "descubrimiento",
+        "6.1": "descubrimiento",
+
+        "1.5": "celebracion",
+        "2.5": "celebracion",
+        "3.5": "celebracion",
+        "4.5": "celebracion",
+        "5.5": "celebracion",
+        "6.5": "celebracion",
+
+        "1.6": "galletas",
+        "2.6": "galletas",
+        "3.2": "galletas",
+        "4.4": "galletas",
+        "5.6": "galletas",
+        "6.6": "galletas"
+    },
+
+    "historias": {
+        "navidad": {
+            "titulo": "Otra Navidad...",
+            "texto": "Otra vez árboles, chimeneas y espíritu navideño... Qué agotamiento."
+        },
+
+        "durmiendo": {
+            "titulo": "Alguien está durmiendo",
+            "texto": "Al menos alguien está descansando... Qué envidia."
+        },
+
+        "perro": {
+            "titulo": "¡El perro!",
+            "texto": "¡Que alguien controle a ese perro!"
+        },
+
+        "descubrimiento": {
+            "titulo": "¡Casi me descubre!",
+            "texto": "¡¿Pero qué haces despierto?! ¡Cierra eso!"
+        },
+
+        "celebracion": {
+            "titulo": "La celebración",
+            "texto": "Sí, sí... qué bonito todo. ¿Cuánto falta?"
+        },
+
+        "galletas": {
+            "titulo": "Las galletas",
+            "texto": "¿Otra vez galletas? ¡Llevo siglos comiendo lo mismo!"
+        }
+    },
+
+    "mensajeFinal": "¡POR FIN! ¡Se acabó! No pienso volver a hacer esto el próximo año!"
+}

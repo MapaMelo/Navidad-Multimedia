@@ -1,0 +1,74 @@
+
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Entrega de regalos - Papá Noel</title>
+
+    <!-- CONECTAR CSS Y JAVASCRIPT -->
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+
+    <main id="contenedor-juego">
+
+        <div id="pantalla">
+
+            <!-- FACHADA DEL PAÍS SELECCIONADO -->
+            <div id="fachada"></div>
+
+            <!-- VENTANAS ILUMINADAS -->
+            <img id="iluminada-1" class="ventana-iluminada" alt="">
+            <img id="iluminada-2" class="ventana-iluminada" alt="">
+            <img id="iluminada-3" class="ventana-iluminada" alt="">
+            <img id="iluminada-4" class="ventana-iluminada" alt="">
+            <img id="iluminada-5" class="ventana-iluminada" alt="">
+            <img id="iluminada-6" class="ventana-iluminada" alt="">
+
+            <!-- ZONAS TÁCTILES DE LAS VENTANAS -->
+            <div id="zona-ventana-1" class="zona-ventana"></div>
+            <div id="zona-ventana-2" class="zona-ventana"></div>
+            <div id="zona-ventana-3" class="zona-ventana"></div>
+            <div id="zona-ventana-4" class="zona-ventana"></div>
+            <div id="zona-ventana-5" class="zona-ventana"></div>
+            <div id="zona-ventana-6" class="zona-ventana"></div>
+
+            <!-- TEXTO DE PAPÁ NOEL -->
+            <div id="texto-fachada">
+                <p id="narracion"></p>
+            </div>
+
+            <!-- CONTADOR DE ENTREGAS -->
+            <div id="contador">
+                <p>ENTREGAS</p>
+                <p id="cantidad-entregas">0/6</p>
+            </div>
+
+            <!-- INSTRUCCIÓN -->
+            <div id="instruccion">
+                <p id="texto-instruccion"></p>
+            </div>
+
+            <!-- REGALO QUE SE DEBE LANZAR -->
+            <div id="regalo">
+                <img id="imagen-regalo" src="" alt="Regalo de Papá Noel">
+                <p id="texto-regalo">Desliza hacia la ventana</p>
+            </div>
+
+            <!-- MENSAJE DESPUÉS DE UNA ENTREGA -->
+            <div id="mensaje-entrega">
+                <p id="titulo-mensaje"></p>
+                <p id="texto-mensaje"></p>
+                <button id="boton-continuar">CONTINUAR</button>
+            </div>
+
+        </div>
+
+    </main>
+
+</body>
+</html>
