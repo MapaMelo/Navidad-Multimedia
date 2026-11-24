@@ -213,7 +213,7 @@ function iniciarTemporizador() {
 botonVamos.onclick = function() {
 
     // Pasar al mapa del siguiente momento.
-    window.location.href = "../../momento-4/mapa.html";
+    window.location.href = "../../momento-4/pantalla-1/mapa.html";
 };
 
 
