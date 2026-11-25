@@ -78,7 +78,7 @@ let fachadas = {
             { top: "15.5%", left: "62.73%", width: "16.55%", height: "7,94%" },
             { top: "35.9%", left: "21.6%", width: "17.1%", height: "7,94%" },
             { top: "36%", left: "62.75%", width: "16.9%", height: "7,98%" },
-            { top: "58.6%", width: "17.1%", height: "7,94%" },
+            { top: "54.1%", left: "0%", width: "36%", height: "7,94%" },
             { top: "58.6%", left: "70.2%", width: "12.8%", height: "7,94%" }
         ]
     },
