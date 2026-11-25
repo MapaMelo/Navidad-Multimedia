@@ -61,12 +61,12 @@ let fachadas = {
         numero: 2,
         imagen: "assets/2. Francia.jpg",
         ventanas: [
-            { top: "13%", left: "16%", width: "40%", height: "40%" },
-            { top: "13%", left: "42%", width: "16%", height: "10%" },
-            { top: "13%", left: "68%", width: "16%", height: "10%" },
-            { top: "39%", left: "10%", width: "24%", height: "16%" },
-            { top: "39%", left: "38%", width: "24%", height: "16%" },
-            { top: "39%", left: "66%", width: "24%", height: "16%" }
+            { top: "24%", left: "11%", width: "23.8%", height: "17%" },
+            { top: "24%", left: "38.6%", width: "23.8%", height: "17%" },
+            { top: "24%", left: "66%", width: "23.8%", height: "17%" },
+            { top: "46.1%", left: "14.3%", width: "17.3%", height: "14%" },
+            { top: "46.1%", left: "32.5%", width: "35.7%", height: "13.7%" },
+            { top: "46.1%", left: "69.1%", width: "17.3%", height: "14%" }
         ]
     },
 
