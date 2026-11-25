@@ -100,12 +100,12 @@ let fachadas = {
         numero: 5,
         imagen: "assets/5. Egipto.jpg",
         ventanas: [
-            { top: "19%", left: "10%", width: "23%", height: "17%" },
-            { top: "19%", left: "39%", width: "23%", height: "17%" },
-            { top: "19%", left: "68%", width: "23%", height: "17%" },
-            { top: "42%", left: "10%", width: "23%", height: "17%" },
-            { top: "42%", left: "39%", width: "23%", height: "17%" },
-            { top: "42%", left: "68%", width: "23%", height: "17%" }
+            { top: "20.6%", left: "15.5%", width: "11%", height: "11.8%" },
+            { top: "20.5%", left: "44.8%", width: "11.4%", height: "12%" },
+            { top: "20.35%", left: "74%", width: "10.9%", height: "12.2%" },
+            { top: "44.8%", left: "15.5%", width: "11%", height: "10.6%" },
+            { top: "44.6%", left: "44.8%", width: "11%", height: "10.6%" },
+            { top: "44.6%", left: "74%", width: "11.5%", height: "10.6%" }
         ]
     },
 
