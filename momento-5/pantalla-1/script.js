@@ -113,12 +113,12 @@ let fachadas = {
         numero: 6,
         imagen: "assets/6. Nueva Zelanda.jpg",
         ventanas: [
-            { top: "23%", left: "40%", width: "20%", height: "12%" },
-            { top: "39%", left: "14%", width: "23%", height: "17%" },
-            { top: "39%", left: "39%", width: "23%", height: "17%" },
-            { top: "39%", left: "64%", width: "23%", height: "17%" },
-            { top: "65%", left: "14%", width: "23%", height: "17%" },
-            { top: "65%", left: "64%", width: "23%", height: "17%" }
+            { top: "22%", left: "45.7%", width: "8.7%", height: "6%" },
+            { top: "39.13%", left: "20%", width: "11.8%", height: "10.74%" },
+            { top: "40%", left: "45%", width: "10.3%", height: "9.9%"},
+            { top: "40%", left: "68.6%", width: "11%", height: "10%" },
+            { top: "64.5%", left: "19%", width: "11.8%", height: "9.5%" },
+            { top: "64.9%", left: "70.4%", width: "11%", height: "8.8%" }
         ]
     }
 
