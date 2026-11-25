@@ -87,12 +87,12 @@ let fachadas = {
         numero: 4,
         imagen: "assets/4. Nepal.png",
         ventanas: [
-            { top: "18%", left: "15%", width: "33%", height: "17%" },
-            { top: "18%", left: "53%", width: "33%", height: "17%" },
-            { top: "39%", left: "15%", width: "33%", height: "17%" },
-            { top: "39%", left: "53%", width: "33%", height: "17%" },
-            { top: "61%", left: "15%", width: "33%", height: "17%" },
-            { top: "61%", left: "53%", width: "33%", height: "17%" }
+            { top: "17%", left: "26%", width: "14%", height: "8.2%" },
+            { top: "17%", left: "61.8%", width: "13%", height: "8.2%" },
+            { top: "35.5%", left: "26%", width: "14%", height: "8%" },
+            { top: "35.5%", left: "61.8%", width: "13%", height: "8%" },
+            { top: "53.5%", left: "26.3%", width: "13%", height: "8%" },
+            { top: "53.5%", left: "61.8%", width: "13%", height: "8%" }
         ]
     },
 
