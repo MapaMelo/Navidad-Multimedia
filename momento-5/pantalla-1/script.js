@@ -48,12 +48,12 @@ let fachadas = {
         numero: 1,
         imagen: "assets/1. Colombia.jpg",
         ventanas: [
-            { top: "21%", left: "20%", width: "13%", height: "10%" },
-            { top: "21%", left: "67%", width: "13%", height: "10%" },
-            { top: "43%", left: "15%", width: "23%", height: "15%" },
-            { top: "43%", left: "62%", width: "23%", height: "15%" },
-            { top: "62%", left: "17%", width: "23%", height: "14%" },
-            { top: "62%", left: "62%", width: "23%", height: "14%" }
+            { top: "18.3%", left: "16%", width: "18%", height: "15,38%" },
+            { top: "18.03%", left: "66%", width: "16%", height: "15,38%" },
+            { top: "38.2%", left: "14.3%", width: "25%", height: "15,38%" },
+            { top: "38.1%", left: "61%", width: "25%", height: "15,38%" },
+            { top: "57%", left: "14.7%", width: "26%", height: "15,38%" },
+            { top: "57.5%", left: "60%", width: "23.5%", height: "15,38%" }
         ]
     },
 
@@ -61,7 +61,7 @@ let fachadas = {
         numero: 2,
         imagen: "assets/2. Francia.jpg",
         ventanas: [
-            { top: "13%", left: "16%", width: "16%", height: "10%" },
+            { top: "13%", left: "16%", width: "40%", height: "40%" },
             { top: "13%", left: "42%", width: "16%", height: "10%" },
             { top: "13%", left: "68%", width: "16%", height: "10%" },
             { top: "39%", left: "10%", width: "24%", height: "16%" },
@@ -78,7 +78,7 @@ let fachadas = {
             { top: "15.5%", left: "62.73%", width: "16.55%", height: "7,94%" },
             { top: "35.9%", left: "21.6%", width: "17.1%", height: "7,94%" },
             { top: "36%", left: "62.75%", width: "16.9%", height: "7,98%" },
-            { top: "57%", width: "17.1%", height: "7,94%" },
+            { top: "58.6%", width: "17.1%", height: "7,94%" },
             { top: "58.6%", left: "70.2%", width: "12.8%", height: "7,94%" }
         ]
     },
