@@ -1,3 +1,24 @@
+
+// REINICIAR LOS DATOS DE LA PARTIDA
+
+function reiniciarPartida() {
+
+    // MOMENTO 2: REGALOS
+    localStorage.removeItem("juguetesTerminados");
+    localStorage.removeItem("jugueteSeleccionado");
+    localStorage.removeItem("papelSeleccionado");
+
+    // MOMENTO 4: MAPA
+    localStorage.removeItem("lugarSeleccionado");
+
+    // MOMENTO 5: ENTREGAS
+    localStorage.removeItem("ventanasEntregadas");
+    localStorage.removeItem("ventanaSeleccionada");
+    localStorage.removeItem("regaloActual");
+
+}
+
+
 // ELEMENTOS DE LA PANTALLA
 
 // Busca los elementos del HTML utilizando sus identificadores.
@@ -64,6 +85,9 @@ async function cargarDatos() {
 
 
 // INICIAR LA PANTALLA
+
+// Borra el progreso anterior porque estamos comenzando una partida nueva.
+reiniciarPartida();
 
 // Llama a la función para cargar los textos y preparar los audios.
 cargarDatos();
