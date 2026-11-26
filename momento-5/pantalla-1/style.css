@@ -69,6 +69,7 @@ body {
     z-index: 2;
 }
 
+
 /* RESALTAR LA VENTANA SELECCIONADA */
 
 .zona-ventana.seleccionada {
@@ -77,6 +78,7 @@ body {
     background-color: rgba(255, 230, 107, 0.12);
     border-radius: 5px;
 }
+
 
 /* LAS VENTANAS ENTREGADAS NO SE PUEDEN SELECCIONAR */
 
@@ -156,10 +158,10 @@ body {
 #regalo {
     display: none;
     position: absolute;
-    bottom: 12%;
-    left: 30%;
-    width: 40%;
-    height: 20%;
+    bottom: 5%;
+    left: 37%;
+    width: 26%;
+    height: 13%;
     text-align: center;
     z-index: 6;
     touch-action: none;
@@ -176,12 +178,12 @@ body {
 #texto-regalo {
     display: inline-block;
     margin: 0;
-    padding: 5px;
+    padding: 4px;
     background-color: white;
     border: 2px solid #9b795c;
     border-radius: 5px;
     color: #493629;
-    font-size: clamp(10px, 2.8vw, 14px);
+    font-size: clamp(9px, 2.5vw, 12px);
     font-weight: bold;
 }
 
@@ -193,6 +195,7 @@ body {
     pointer-events: none;
 }
 
+
 /* ANIMACIÓN CUANDO FALLA */
 
 #regalo.fallido {
@@ -200,42 +203,3 @@ body {
     pointer-events: none;
 }
 
-
-/* MENSAJE DESPUÉS DE LA ENTREGA */
-
-#mensaje-entrega {
-    display: none;
-    position: absolute;
-    left: 8%;
-    bottom: 5%;
-    width: 84%;
-    background-color: white;
-    border: 3px solid #9b795c;
-    border-radius: 8px;
-    padding: 10px;
-    text-align: center;
-    z-index: 8;
-}
-
-#mensaje-entrega p {
-    margin: 5px;
-    color: #493629;
-    font-size: clamp(12px, 3vw, 15px);
-    font-weight: bold;
-}
-
-
-/* BOTÓN CONTINUAR */
-
-#boton-continuar {
-    display: none;
-    margin: 8px auto 0;
-    padding: 9px 18px;
-    background-color: #bd2424;
-    border: 3px solid #791515;
-    border-radius: 8px;
-    color: white;
-    font-size: 14px;
-    font-weight: bold;
-    box-shadow: 0 4px 0 #791515;
-}

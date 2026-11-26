@@ -1,4 +1,3 @@
-
 // ELEMENTOS DE LA PANTALLA
 
 let fachada = document.getElementById("fachada");
@@ -9,20 +8,15 @@ let textoInstruccion = document.getElementById("texto-instruccion");
 let regalo = document.getElementById("regalo");
 let imagenRegalo = document.getElementById("imagen-regalo");
 
-let mensajeEntrega = document.getElementById("mensaje-entrega");
-let tituloMensaje = document.getElementById("titulo-mensaje");
-let textoMensaje = document.getElementById("texto-mensaje");
-let botonContinuar = document.getElementById("boton-continuar");
-
 
 // VARIABLES DEL PROYECTO
 
 let lugarSeleccionado = localStorage.getItem("lugarSeleccionado");
 
-let ventanasEntregadas = JSON.parse(localStorage.getItem("ventanasEntregadas")) || [];
+let ventanasEntregadas =
+    JSON.parse(localStorage.getItem("ventanasEntregadas")) || [];
 
 let ventanaSeleccionada = null;
-
 let regaloActual = ventanasEntregadas.length + 1;
 
 let datos;
@@ -48,12 +42,12 @@ let fachadas = {
         numero: 1,
         imagen: "assets/1. Colombia.jpg",
         ventanas: [
-            { top: "18.3%", left: "16%", width: "18%", height: "15,38%" },
-            { top: "18.03%", left: "66%", width: "16%", height: "15,38%" },
-            { top: "38.2%", left: "14.3%", width: "25%", height: "15,38%" },
-            { top: "38.1%", left: "61%", width: "25%", height: "15,38%" },
-            { top: "57%", left: "14.7%", width: "26%", height: "15,38%" },
-            { top: "57.5%", left: "60%", width: "23.5%", height: "15,38%" }
+            { top: "18.3%", left: "16%", width: "18%", height: "15.38%" },
+            { top: "18.03%", left: "66%", width: "16%", height: "15.38%" },
+            { top: "38.2%", left: "14.3%", width: "25%", height: "15.38%" },
+            { top: "38.1%", left: "61%", width: "25%", height: "15.38%" },
+            { top: "57%", left: "14.7%", width: "26%", height: "15.38%" },
+            { top: "57.5%", left: "60%", width: "23.5%", height: "15.38%" }
         ]
     },
 
@@ -74,12 +68,12 @@ let fachadas = {
         numero: 3,
         imagen: "assets/3. Estados Unidos.jpg",
         ventanas: [
-            { top: "15.55%", left: "21.79%", width: "16.9%", height: "87,9%" },
-            { top: "15.5%", left: "62.73%", width: "16.55%", height: "7,94%" },
-            { top: "35.9%", left: "21.6%", width: "17.1%", height: "7,94%" },
-            { top: "36%", left: "62.75%", width: "16.9%", height: "7,98%" },
-            { top: "54.1%", left: "0%", width: "36%", height: "7,94%" },
-            { top: "58.6%", left: "70.2%", width: "12.8%", height: "7,94%" }
+            { top: "15.55%", left: "21.79%", width: "16.9%", height: "12.4%" },
+            { top: "15.5%", left: "62.73%", width: "16.55%", height: "12.9%" },
+            { top: "35.9%", left: "21.6%", width: "17.1%", height: "13.3%" },
+            { top: "35.8%", left: "62.5%", width: "17.5%", height: "13.4%" },
+            { top: "54.1%", left: "0%", width: "36%", height: "40%" },
+            { top: "58.6%", left: "70.2%", width: "12.8%", height: "13.3%" }
         ]
     },
 
@@ -115,7 +109,7 @@ let fachadas = {
         ventanas: [
             { top: "22%", left: "45.7%", width: "8.7%", height: "6%" },
             { top: "39.13%", left: "20%", width: "11.8%", height: "10.74%" },
-            { top: "40%", left: "45%", width: "10.3%", height: "9.9%"},
+            { top: "40%", left: "45%", width: "10.3%", height: "9.9%" },
             { top: "40%", left: "68.6%", width: "11%", height: "10%" },
             { top: "64.5%", left: "19%", width: "11.8%", height: "9.5%" },
             { top: "64.9%", left: "70.4%", width: "11%", height: "8.8%" }
@@ -133,7 +127,6 @@ async function cargarDatos() {
     datos = await respuesta.json();
 
     narracion.textContent = datos.narracionInicial;
-
     textoInstruccion.textContent = datos.instruccionInicial;
 
     // BUSCAR LA FACHADA DEL PAÍS SELECCIONADO
@@ -148,9 +141,7 @@ async function cargarDatos() {
         for (let i = 1; i <= 6; i++) {
 
             let zona = document.getElementById("zona-ventana-" + i);
-
             let imagen = document.getElementById("iluminada-" + i);
-
             let posicion = fachadas[lugarSeleccionado].ventanas[i - 1];
 
             // UBICAR LA ZONA TÁCTIL
@@ -177,7 +168,6 @@ async function cargarDatos() {
             if (ventanasEntregadas.includes(i)) {
 
                 imagen.style.display = "block";
-
                 zona.classList.add("entregada");
 
             }
@@ -186,12 +176,11 @@ async function cargarDatos() {
 
         actualizarContador();
 
-        // REVISAR SI YA SE COMPLETARON LAS SEIS ENTREGAS
+        // SI YA SE COMPLETARON LAS SEIS ENTREGAS,
+        // MOSTRAR EL MENSAJE FINAL.
 
         if (ventanasEntregadas.length === 6) {
-
             mostrarFinal();
-
         }
 
     } else {
@@ -216,9 +205,9 @@ function actualizarContador() {
 
 function seleccionarVentana(numero) {
 
-    // NO PERMITIR OTRA SELECCIÓN DURANTE UN LANZAMIENTO O MENSAJE
+    // NO PERMITIR OTRA SELECCIÓN MIENTRAS EL REGALO ESTÁ EN MOVIMIENTO
 
-    if (entregaEnCurso || lanzamientoEnCurso) {
+    if (lanzamientoEnCurso || entregaEnCurso) {
         return;
     }
 
@@ -227,14 +216,13 @@ function seleccionarVentana(numero) {
     if (ventanasEntregadas.includes(numero)) {
 
         narracion.textContent = "Esa ventana ya recibió su regalo. ¡Busca otra!";
-
         return;
+
     }
 
     // GUARDAR LA VENTANA SELECCIONADA
 
     ventanaSeleccionada = numero;
-
     localStorage.setItem("ventanaSeleccionada", numero);
 
     // QUITAR EL RESALTADO ANTERIOR
@@ -242,7 +230,6 @@ function seleccionarVentana(numero) {
     for (let i = 1; i <= 6; i++) {
 
         let zona = document.getElementById("zona-ventana-" + i);
-
         zona.classList.remove("seleccionada");
 
     }
@@ -259,7 +246,6 @@ function seleccionarVentana(numero) {
     imagenRegalo.src = "assets/" + regaloActual + ". REGALO M.jpg";
 
     regalo.style.display = "block";
-
     regalo.style.transform = "translate(0, 0)";
 
     regalo.classList.remove("volando");
@@ -268,7 +254,6 @@ function seleccionarVentana(numero) {
     // ACTUALIZAR LOS TEXTOS
 
     narracion.textContent = datos.narracionSeleccion;
-
     textoInstruccion.textContent = datos.instruccionSeleccion;
 
 }
@@ -289,7 +274,6 @@ for (let i = 1; i <= 6; i++) {
         if (ultimoToque === i && ahora - tiempoUltimoToque < 350) {
 
             clearTimeout(temporizadorToque);
-
             ultimoToque = 0;
 
             seleccionarVentana(i);
@@ -297,15 +281,12 @@ for (let i = 1; i <= 6; i++) {
         } else {
 
             ultimoToque = i;
-
             tiempoUltimoToque = ahora;
 
             clearTimeout(temporizadorToque);
 
             temporizadorToque = setTimeout(function() {
-
                 ultimoToque = 0;
-
             }, 350);
 
         }
@@ -404,7 +385,6 @@ function lanzarRegalo() {
     );
 
     let rectangulo = zona.getBoundingClientRect();
-
     let regaloRectangulo = regalo.getBoundingClientRect();
 
     // CALCULAR HACIA DÓNDE DEBE VOLAR EL REGALO
@@ -434,7 +414,6 @@ function lanzarRegalo() {
     setTimeout(function() {
 
         lanzamientoEnCurso = false;
-
         completarEntrega();
 
     }, 750);
@@ -447,13 +426,11 @@ function lanzarRegalo() {
 function fallarLanzamiento() {
 
     intentosFallidos = intentosFallidos + 1;
-
     lanzamientoEnCurso = true;
 
     // MOSTRAR EL MOVIMIENTO DE CAÍDA
 
     regalo.classList.add("fallido");
-
     regalo.style.transform = "translate(0, 90px) rotate(25deg)";
 
     // ELEGIR EL COMENTARIO DE PAPÁ NOEL
@@ -461,13 +438,10 @@ function fallarLanzamiento() {
     let posicionMensaje = intentosFallidos - 1;
 
     if (posicionMensaje >= datos.fallos.length) {
-
         posicionMensaje = datos.fallos.length - 1;
-
     }
 
     narracion.textContent = datos.fallos[posicionMensaje];
-
     textoInstruccion.textContent = "¡Inténtalo otra vez!";
 
     // DEVOLVER EL REGALO A SU POSICIÓN
@@ -475,9 +449,7 @@ function fallarLanzamiento() {
     setTimeout(function() {
 
         regalo.style.transition = "none";
-
         regalo.style.transform = "translate(0, 0)";
-
         regalo.classList.remove("fallido");
 
         lanzamientoEnCurso = false;
@@ -485,9 +457,7 @@ function fallarLanzamiento() {
         // VOLVER A ACTIVAR LA TRANSICIÓN
 
         setTimeout(function() {
-
             regalo.style.transition = "";
-
         }, 50);
 
     }, 450);
@@ -523,57 +493,40 @@ function completarEntrega() {
     );
 
     zona.classList.remove("seleccionada");
-
     zona.classList.add("entregada");
 
     // OCULTAR EL REGALO
 
     regalo.style.display = "none";
-
     regalo.style.transform = "translate(0, 0)";
-
     regalo.classList.remove("volando");
 
     // ACTUALIZAR EL CONTADOR
 
     actualizarContador();
 
-    // MOSTRAR LA HISTORIA DEL APARTAMENTO
+    // MOSTRAR LA REACCIÓN DE PAPÁ NOEL
 
     mostrarHistoria();
 
 }
 
 
-// MOSTRAR LA HISTORIA DEL APARTAMENTO
+// MOSTRAR LA REACCIÓN DESPUÉS DE LA ENTREGA
 
 function mostrarHistoria() {
-
-    entregaEnCurso = true;
 
     // IDENTIFICAR EL PAÍS Y LA VENTANA SELECCIONADA
 
     let numeroPais = fachadas[lugarSeleccionado].numero;
-
     let claveVentana = numeroPais + "." + ventanaSeleccionada;
 
     // BUSCAR QUÉ ESCENA CORRESPONDE A ESA VENTANA
 
     let nombreEscena = datos.escenasPorVentana[claveVentana];
-
     let historia = datos.historias[nombreEscena];
 
-    // MOSTRAR EL TÍTULO Y LA REACCIÓN DE LA ESCENA
-
-    tituloMensaje.textContent = historia.titulo;
-
-    textoMensaje.textContent = historia.texto;
-
-    mensajeEntrega.style.display = "block";
-
-    botonContinuar.style.display = "block";
-
-    // LA NARRACIÓN DEPENDE DEL ORDEN DE LAS ENTREGAS
+    // MOSTRAR LA REACCIÓN DE PAPÁ NOEL EN LA PARTE SUPERIOR
 
     if (ventanasEntregadas.length === 1) {
 
@@ -581,7 +534,8 @@ function mostrarHistoria() {
 
     } else if (ventanasEntregadas.length === 6) {
 
-        narracion.textContent = datos.narracionUltimaEntrega;
+        narracion.textContent =
+            "¡ENTREGAS COMPLETADAS! " + datos.mensajeFinal;
 
     } else {
 
@@ -589,65 +543,71 @@ function mostrarHistoria() {
 
     }
 
-    textoInstruccion.textContent = "Entrega completada.";
+    // INDICAR QUE YA SE PUEDE SELECCIONAR OTRA VENTANA
 
-}
+    if (ventanasEntregadas.length < 6) {
 
+        textoInstruccion.textContent =
+            "Toca dos veces otra ventana para continuar.";
 
-// BOTÓN PARA CONTINUAR CON EL SIGUIENTE REGALO
+        // LIBERAR LA SELECCIÓN PARA PODER ELEGIR OTRA VENTANA
 
-botonContinuar.onclick = function() {
+        entregaEnCurso = false;
+        ventanaSeleccionada = null;
 
-    mensajeEntrega.style.display = "none";
-
-    entregaEnCurso = false;
-
-    ventanaSeleccionada = null;
-
-    localStorage.removeItem("ventanaSeleccionada");
-
-    // REVISAR SI YA SE COMPLETARON LAS SEIS ENTREGAS
-
-    if (ventanasEntregadas.length === 6) {
-
-        mostrarFinal();
-
-    } else {
-
-        // PASAR AL SIGUIENTE REGALO
+        // PREPARAR EL SIGUIENTE REGALO
 
         regaloActual = ventanasEntregadas.length + 1;
 
         localStorage.setItem("regaloActual", regaloActual);
-
-        narracion.textContent = datos.narracionInicial;
-
-        textoInstruccion.textContent = datos.instruccionInicial;
+        localStorage.removeItem("ventanaSeleccionada");
 
         intentosFallidos = 0;
 
+    } else {
+
+        // DESPUÉS DE LA ÚLTIMA ENTREGA, PASAR AL MOMENTO 6
+
+        textoInstruccion.textContent = "Recorrido terminado.";
+
+        entregaEnCurso = true;
+
+        setTimeout(function() {
+
+            window.location.href =
+                "../../momento-6/pantalla-1/cansado.html";
+
+        }, 3000);
+
     }
 
-};
+}
 
 
-// MOSTRAR EL FINAL DEL RECORRIDO
+// MOSTRAR EL FINAL SI SE RECARGA LA PANTALLA
+// CUANDO LAS SEIS ENTREGAS YA ESTÁN COMPLETADAS.
 
 function mostrarFinal() {
 
     regalo.style.display = "none";
 
-    mensajeEntrega.style.display = "block";
+    // MOSTRAR EL MENSAJE FINAL
 
-    tituloMensaje.textContent = "¡ENTREGAS COMPLETADAS!";
-
-    textoMensaje.textContent = datos.mensajeFinal;
-
-    botonContinuar.style.display = "none";
-
-    narracion.textContent = datos.narracionUltimaEntrega;
+    narracion.textContent =
+        "¡ENTREGAS COMPLETADAS! " + datos.mensajeFinal;
 
     textoInstruccion.textContent = "Recorrido terminado.";
+
+    entregaEnCurso = true;
+
+    // PASAR AL MOMENTO 6 DESPUÉS DE DAR TIEMPO PARA LEER
+
+    setTimeout(function() {
+
+        window.location.href =
+            "../../momento-6/pantalla-1/cansado.html";
+
+    }, 796000);
 
 }
 
