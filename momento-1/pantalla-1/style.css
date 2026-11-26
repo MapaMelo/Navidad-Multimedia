@@ -28,12 +28,7 @@ body {
 /* IMAGEN Y ELEMENTOS SUPERPUESTOS */
 
 #pantalla {
-    /* 
-    Define el ancho de la ilustración.
-    100vw: no supera el ancho de la pantalla.
-    430px: establece un ancho máximo.
-    56.25vh: limita el ancho para que una imagen vertical 9:16 quepa en la altura.
-    */
+
     width: min(100vw, 430px, 56.25vh);
 
     position: relative; /* Sirve como referencia para ubicar los elementos encima de la imagen. */
