@@ -1,0 +1,149 @@
+
+<!doctype html>
+<html lang="es">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Navidad - Papá Noel</title>
+
+    <style>
+
+        /* CONFIGURACIÓN GENERAL */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background-color: #252525;
+            overflow: hidden;
+        }
+
+
+        /* CONTENEDOR DE LA EXPERIENCIA */
+
+        #contenedor-juego {
+            width: 100%;
+            height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+
+        /* VENTANA DONDE SE CARGAN LOS MOMENTOS */
+
+        #pantallas {
+            width: min(100vw, 430px, 56.25vh);
+            height: min(177.78vw, 100vh);
+
+            border: none;
+            display: block;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- CONTENEDOR PRINCIPAL DEL JUEGO -->
+
+    <main id="contenedor-juego">
+
+        <!--
+        Esta ventana muestra los HTML de los diferentes momentos.
+        La página principal permanece abierta mientras cambian
+        las pantallas que aparecen dentro de ella.
+        -->
+
+        <iframe
+            id="pantallas"
+            src="momento-1/pantalla-1/inicio.html">
+        </iframe>
+
+    </main>
+
+
+    <!-- REPRODUCTORES DE MÚSICA -->
+
+    <audio id="musica-feliz" src="sonidos/música feliz.mp3" loop></audio>
+
+    <audio id="musica-ambiente" src="sonidos/música ambiente.mp3" loop></audio>
+
+
+    <script>
+
+        // ELEMENTOS DE LOS AUDIOS
+
+        let musicaFeliz = document.getElementById("musica-feliz");
+        let musicaAmbiente = document.getElementById("musica-ambiente");
+
+
+        // CONFIGURAR LOS VOLÚMENES
+
+        musicaFeliz.volume = 0.20;
+        musicaAmbiente.volume = 0.20;
+
+
+        // RECIBIR MENSAJES DE LAS PANTALLAS
+
+        window.addEventListener("message", function(event) {
+
+            // INICIAR LA MÚSICA FELIZ
+
+            if (event.data === "iniciar-musica-feliz") {
+
+                musicaAmbiente.pause();
+
+                musicaFeliz.play().catch(function() {
+
+                    console.log("No se pudo iniciar la música feliz.");
+
+                });
+
+            }
+
+
+            // CAMBIAR A LA MÚSICA AMBIENTE
+
+            if (event.data === "cambiar-musica-ambiente") {
+
+                musicaFeliz.pause();
+
+                musicaAmbiente.currentTime = 0;
+
+                musicaAmbiente.play().catch(function() {
+
+                    console.log("No se pudo iniciar la música ambiente.");
+
+                });
+
+            }
+            
+
+            // PAUSAR LA MÚSICA AMBIENTE.
+            if(event.data==="pausar-musica-ambiente") {
+                musicaAmbiente.pause();
+            }
+            
+            // REANUDAR LA MÚSICA AMBIENTE.
+            if(event.data==="reanudar-musica-ambiente") {
+
+                musicaAmbiente.play().catch(function(){
+                    console.log("No se pudo reanudar la música ambiente.");
+                });
+}
+
+        });
+
+    </script>
+
+</body>
+
+</html>

@@ -4,17 +4,6 @@
 let narracion = document.getElementById("narracion");
 
 
-// MÚSICA DE FONDO
-
-let musicaAmbiente = new Audio("../../sonidos/música ambiente.mp3");
-
-// Mantener la música en reproducción continua.
-musicaAmbiente.loop = true;
-
-// Ajustar el volumen.
-musicaAmbiente.volume = 0.35;
-
-
 // FUNCIÓN PARA CARGAR LOS DATOS
 
 async function cargarDatos() {
@@ -24,34 +13,12 @@ async function cargarDatos() {
 
     narracion.textContent = datos.narracion;
 
-
-    // RECUPERAR LA POSICIÓN DE LA MÚSICA
-
-    let posicionGuardada = sessionStorage.getItem("posicionMusicaAmbiente");
-
-    // Si existe una posición guardada, continuar desde ese segundo.
-    if (posicionGuardada !== null) {
-
-        musicaAmbiente.currentTime = Number(posicionGuardada);
-
-    }
-
-    // Intentar reproducir la música.
-    musicaAmbiente.play().catch(function() {
-
-        console.log("El navegador bloqueó la reproducción automática.");
-
-    });
-
 }
 
 
 // FUNCIÓN PARA SELECCIONAR UN PAÍS
 
 function seleccionarPais(pais) {
-
-    // Guardar el segundo exacto de la música.
-    sessionStorage.setItem("posicionMusicaAmbiente", musicaAmbiente.currentTime);
 
     // Guardar el país seleccionado para utilizarlo en la fachada.
     localStorage.setItem("lugarSeleccionado", pais);

@@ -1,3 +1,4 @@
+
 // ELEMENTOS DE LA PANTALLA
 
 let pantalla = document.getElementById("pantalla");
@@ -10,15 +11,6 @@ let botonContinuar = document.getElementById("boton-continuar");
 
 
 // AUDIOS
-
-// Crea el audio de Christmas Wrapping.
-let musicaAmbiente = new Audio("../../sonidos/música ambiente.mp3");
-
-// Hace que la canción se repita continuamente.
-musicaAmbiente.loop = true;
-
-// Ajusta el volumen de la música.
-musicaAmbiente.volume = 0.35;
 
 // Crea los dos sonidos de envolver.
 let sonidoEnvolver1 = new Audio("../../sonidos/envolver1.mp3");
@@ -97,22 +89,6 @@ let distanciaInicial = 0;
 let gestoCompletado = false;
 
 
-// FUNCIÓN PARA REPRODUCIR LA MÚSICA AMBIENTE
-
-function iniciarMusica() {
-
-    // Evita volver a iniciar la canción si ya está sonando.
-    if (musicaAmbiente.paused) {
-
-        musicaAmbiente.play().catch(function() {
-            console.log("El navegador no permitió reproducir la música automáticamente");
-        });
-
-    }
-
-}
-
-
 // FUNCIÓN PARA CALCULAR LA DISTANCIA ENTRE DOS DEDOS
 
 function calcularDistancia(dedo1, dedo2) {
@@ -156,20 +132,6 @@ async function cargarDatos() {
     // MOSTRAR EL PENSAMIENTO DE PAPÁ NOEL.
     narracion.textContent = datos.narracion;
 
-
-    // CONTINUAR LA MÚSICA AMBIENTE.
-
-    // Recupera el segundo en el que quedó la canción.
-    let posicionGuardada = sessionStorage.getItem("posicionMusicaAmbiente");
-
-    // Si existe una posición guardada, continúa desde ese segundo.
-    if (posicionGuardada !== null) {
-        musicaAmbiente.currentTime = Number(posicionGuardada);
-    }
-
-    // Reproduce Christmas Wrapping.
-    iniciarMusica();
-
 }
 
 
@@ -179,9 +141,6 @@ pantalla.addEventListener("touchstart", function(event) {
 
     // COMPROBAR QUE HAYA EXACTAMENTE DOS DEDOS.
     if (event.touches.length === 2 && !gestoCompletado) {
-
-        // Si la música no había empezado, intenta reproducirla.
-        iniciarMusica();
 
         // GUARDAR LA DISTANCIA INICIAL.
         distanciaInicial = calcularDistancia(
@@ -316,9 +275,6 @@ function terminarRegalo() {
 // BOTÓN PARA CONTINUAR
 
 botonContinuar.onclick = function() {
-
-    // Guardar el segundo exacto de Christmas Wrapping.
-    sessionStorage.setItem("posicionMusicaAmbiente", musicaAmbiente.currentTime);
 
     // SI YA ESTÁN LOS SEIS REGALOS, IR AL TRINEO.
     if (juguetesTerminados.length === 6) {

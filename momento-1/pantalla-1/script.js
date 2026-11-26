@@ -206,3 +206,7 @@ reiniciarPartida();
 
 // Carga los textos y prepara los audios.
 cargarDatos();
+
+// AVISAR AL INDEX PRINCIPAL QUE DEBE INICIAR LA MÚSICA
+
+window.parent.postMessage("iniciar-musica-feliz", "*");

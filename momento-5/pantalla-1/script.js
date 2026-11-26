@@ -38,10 +38,7 @@ let entregaEnCurso = false;
 let intentosFallidos = 0;
 
 
-// SONIDOS Y MÚSICA
-
-// Música que acompaña el recorrido.
-let musicaAmbiente = new Audio("../../sonidos/música ambiente.mp3");
+// SONIDOS
 
 // Sonido que aparece cuando el regalo entra por la ventana.
 let sonidoVidrio = new Audio("../../sonidos/vidrio.mp3");
@@ -57,17 +54,13 @@ let sonidoPerro = new Audio("../../sonidos/ladrido.mp3");
 let sonidoPasos = new Audio("../../sonidos/pasos.mp3");
 let sonidoRisas = new Audio("../../sonidos/risas.mp3");
 
-// La música ambiente se repite durante el recorrido.
-musicaAmbiente.loop = true;
-musicaAmbiente.volume = 0.35;
-
 // La música navideña y la chimenea se mantienen mientras
 // esté activa la escena de Navidad.
 sonidoNavidad.loop = true;
 sonidoChimenea.loop = true;
 
 // Ajustar el volumen de los sonidos.
-sonidoVidrio.volume = 0.8;
+sonidoVidrio.volume = 0.45;
 sonidoFallo.volume = 0.8;
 sonidoNavidad.volume = 0.7;
 sonidoChimenea.volume = 0.8;
@@ -82,19 +75,6 @@ sonidoRisas.volume = 0.8;
 // Permite evitar que una escena anterior siga reproduciéndose
 // cuando el usuario selecciona otra ventana.
 let secuenciaAudio = 0;
-
-
-// FUNCIÓN PARA REPRODUCIR LA MÚSICA AMBIENTE
-
-function reproducirMusicaAmbiente() {
-
-    musicaAmbiente.play().catch(function() {
-
-        console.log("El navegador bloqueó la música ambiente.");
-
-    });
-
-}
 
 
 // FUNCIÓN PARA DETENER LOS SONIDOS DE LAS ESCENAS
@@ -150,12 +130,8 @@ function detenerSecuenciaSonido() {
 
 function continuarMusicaAmbiente() {
 
-    // Si la música ya está sonando, no hacer nada.
-    if (musicaAmbiente.paused) {
-
-        reproducirMusicaAmbiente();
-
-    }
+    // Avisar al index principal que debe reanudar la música.
+    window.parent.postMessage("reanudar-musica-ambiente", "*");
 
 }
 
@@ -199,19 +175,8 @@ function reproducirSonidoEscena(nombreEscena, numeroSecuencia) {
 
         sonidoRonquido.currentTime = 0;
 
-        sonidoRonquido.onended = function() {
-
-            if (numeroSecuencia === secuenciaAudio) {
-                continuarMusicaAmbiente();
-            }
-
-        };
-
         sonidoRonquido.play().catch(function() {
-
             console.log("No se pudo reproducir el ronquido.");
-            continuarMusicaAmbiente();
-
         });
 
     }
@@ -223,19 +188,8 @@ function reproducirSonidoEscena(nombreEscena, numeroSecuencia) {
 
         sonidoPerro.currentTime = 0;
 
-        sonidoPerro.onended = function() {
-
-            if (numeroSecuencia === secuenciaAudio) {
-                continuarMusicaAmbiente();
-            }
-
-        };
-
         sonidoPerro.play().catch(function() {
-
             console.log("No se pudo reproducir el ladrido.");
-            continuarMusicaAmbiente();
-
         });
 
     }
@@ -247,19 +201,8 @@ function reproducirSonidoEscena(nombreEscena, numeroSecuencia) {
 
         sonidoPasos.currentTime = 0;
 
-        sonidoPasos.onended = function() {
-
-            if (numeroSecuencia === secuenciaAudio) {
-                continuarMusicaAmbiente();
-            }
-
-        };
-
         sonidoPasos.play().catch(function() {
-
             console.log("No se pudieron reproducir los pasos.");
-            continuarMusicaAmbiente();
-
         });
 
     }
@@ -271,19 +214,8 @@ function reproducirSonidoEscena(nombreEscena, numeroSecuencia) {
 
         sonidoRisas.currentTime = 0;
 
-        sonidoRisas.onended = function() {
-
-            if (numeroSecuencia === secuenciaAudio) {
-                continuarMusicaAmbiente();
-            }
-
-        };
-
         sonidoRisas.play().catch(function() {
-
             console.log("No se pudieron reproducir las risas.");
-            continuarMusicaAmbiente();
-
         });
 
     }
@@ -291,59 +223,29 @@ function reproducirSonidoEscena(nombreEscena, numeroSecuencia) {
 
     // ESCENA DE LAS GALLETAS
 
-    else {
+    else if (nombreEscena === "galletas") {
 
-        // Esta escena no tiene un sonido adicional.
-        // Por eso la música ambiente puede continuar.
-        continuarMusicaAmbiente();
+        // Reproducir el sonido de la fogata.
+        sonidoChimenea.currentTime = 0;
+
+        sonidoChimenea.play().catch(function() {
+            console.log("No se pudo reproducir la chimenea de las galletas.");
+        });
 
     }
 
 }
 
 
-// FUNCIÓN PARA INICIAR LA SECUENCIA DE UNA ENTREGA
+// FUNCIÓN PARA INICIAR LOS SONIDOS DE UNA ENTREGA
 
-function iniciarSecuenciaSonido(claveVentana) {
+function iniciarSecuenciaSonido(nombreEscena) {
 
-    // Crear un nuevo número de secuencia.
-    secuenciaAudio = secuenciaAudio + 1;
+    // REPRODUCIR EL SONIDO INDIVIDUAL DE LA ESCENA.
+    // El sonido del vidrio se reproduce por separado
+    // cuando aparece la ventana iluminada.
 
-    let numeroSecuencia = secuenciaAudio;
-
-    // Detener cualquier sonido de una escena anterior.
-    detenerAudiosVentana();
-
-    // Pausar la música ambiente mientras suena el vidrio
-    // y la escena de la ventana.
-    musicaAmbiente.pause();
-
-    // Reiniciar el sonido del vidrio.
-    sonidoVidrio.currentTime = 0;
-
-    // Cuando termine el vidrio, reproducir el sonido
-    // correspondiente a la escena.
-    sonidoVidrio.onended = function() {
-
-        reproducirSonidoEscena(
-            claveVentana,
-            numeroSecuencia
-        );
-
-    };
-
-    // Reproducir el sonido del vidrio.
-    sonidoVidrio.play().catch(function() {
-
-        console.log("No se pudo reproducir el sonido del vidrio.");
-
-        // Si no se puede reproducir, continuar con la escena.
-        reproducirSonidoEscena(
-            claveVentana,
-            numeroSecuencia
-        );
-
-    });
+    reproducirSonidoEscena(nombreEscena, secuenciaAudio);
 
 }
 
@@ -502,22 +404,6 @@ async function cargarDatos() {
         actualizarContador();
 
 
-        // RECUPERAR LA POSICIÓN DE LA MÚSICA AMBIENTE
-
-        let posicionGuardada =
-            sessionStorage.getItem("posicionMusicaAmbiente");
-
-        if (posicionGuardada !== null) {
-
-            musicaAmbiente.currentTime = Number(posicionGuardada);
-
-        }
-
-        // REPRODUCIR LA MÚSICA AMBIENTE
-
-        reproducirMusicaAmbiente();
-
-
         // SI YA SE COMPLETARON LAS SEIS ENTREGAS,
         // MOSTRAR EL MENSAJE FINAL.
 
@@ -566,8 +452,9 @@ function seleccionarVentana(numero) {
 
     detenerSecuenciaSonido();
 
-    // Si la música ambiente estaba pausada,
-    // volver a reproducirla mientras se prepara el siguiente regalo.
+    // REANUDAR LA MÚSICA AMBIENTE MIENTRAS SE PREPARA
+    // EL SIGUIENTE REGALO.
+
     continuarMusicaAmbiente();
 
 
@@ -771,7 +658,8 @@ function lanzarRegalo() {
     lanzamientoEnCurso = true;
 
 
-    // ANIMAR EL REGALO
+    // ANIMAR EL REGALO.
+    // EL SONIDO DEL VIDRIO NO SE REPRODUCE TODAVÍA.
 
     regalo.classList.add("volando");
 
@@ -864,15 +752,6 @@ function completarEntrega() {
     );
 
 
-    // MOSTRAR LA VENTANA ILUMINADA
-
-    let imagen = document.getElementById(
-        "iluminada-" + ventanaSeleccionada
-    );
-
-    imagen.style.display = "block";
-
-
     // IDENTIFICAR LA ESCENA QUE CORRESPONDE A ESTA VENTANA
 
     let numeroPais = fachadas[lugarSeleccionado].numero;
@@ -882,7 +761,55 @@ function completarEntrega() {
     let nombreEscena = datos.escenasPorVentana[claveVentana];
 
 
-    // INICIAR LA SECUENCIA DE SONIDOS DE LA ENTREGA
+    // OCULTAR EL REGALO
+
+    regalo.style.display = "none";
+    regalo.style.transform = "translate(0, 0)";
+    regalo.classList.remove("volando");
+
+
+    // MOSTRAR LA VENTANA ILUMINADA
+
+    let imagen = document.getElementById(
+        "iluminada-" + ventanaSeleccionada
+    );
+
+    imagen.style.display = "block";
+
+
+    // PAUSAR LA MÚSICA AMBIENTE MIENTRAS SUENA EL VIDRIO
+
+    window.parent.postMessage("pausar-musica-ambiente", "*");
+
+
+    // REPRODUCIR EL VIDRIO DESDE EL SEGUNDO 2.
+    // ESTO OCURRE JUSTO CUANDO APARECE LA VENTANA ILUMINADA.
+
+    sonidoVidrio.currentTime = 2;
+
+    sonidoVidrio.onended = function() {
+
+        // REANUDAR LA MÚSICA AMBIENTE CUANDO TERMINE EL VIDRIO.
+
+        continuarMusicaAmbiente();
+
+        sonidoVidrio.onended = null;
+
+    };
+
+    sonidoVidrio.play().catch(function() {
+
+        console.log("No se pudo reproducir el sonido del vidrio.");
+
+        // Si el sonido no se puede reproducir,
+        // reanudar la música ambiente igualmente.
+
+        continuarMusicaAmbiente();
+
+    });
+
+
+    // INICIAR EL SONIDO INDIVIDUAL DE LA ESCENA.
 
     iniciarSecuenciaSonido(nombreEscena);
 
@@ -895,13 +822,6 @@ function completarEntrega() {
 
     zona.classList.remove("seleccionada");
     zona.classList.add("entregada");
-
-
-    // OCULTAR EL REGALO
-
-    regalo.style.display = "none";
-    regalo.style.transform = "translate(0, 0)";
-    regalo.classList.remove("volando");
 
 
     // OCULTAR LA ANIMACIÓN DE SWIPE
@@ -987,7 +907,7 @@ function mostrarHistoria() {
 
             irAMomento6();
 
-        }, 3000);
+        }, 8000);
 
     }
 
@@ -998,20 +918,19 @@ function mostrarHistoria() {
 
 function irAMomento6() {
 
-    // Detener los sonidos de la última escena.
+    // DETENER LOS SONIDOS DE LA ÚLTIMA ESCENA.
+
     detenerSecuenciaSonido();
 
-    // Guardar la posición de la música ambiente para
-    // que el Momento 6 pueda continuar desde ese segundo.
-    sessionStorage.setItem(
-        "posicionMusicaAmbiente",
-        musicaAmbiente.currentTime
-    );
 
-    // Detener la música en esta pantalla.
-    musicaAmbiente.pause();
+    // REANUDAR LA MÚSICA AMBIENTE PARA QUE CONTINÚE
+    // DURANTE LA TRANSICIÓN AL MOMENTO 6.
 
-    // Pasar al Momento 6.
+    continuarMusicaAmbiente();
+
+
+    // PASAR AL MOMENTO 6.
+
     window.location.href =
         "../../momento-6/pantalla-1/cansado.html";
 

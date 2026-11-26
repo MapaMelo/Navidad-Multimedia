@@ -17,17 +17,6 @@ let animacionesTap = [
 ];
 
 
-// MÚSICA DE FONDO
-
-let musicaAmbiente = new Audio("../../sonidos/música ambiente.mp3");
-
-// La música se reproduce en bucle.
-musicaAmbiente.loop = true;
-
-// Ajustar el volumen de la música.
-musicaAmbiente.volume = 0.35;
-
-
 // SONIDOS
 
 let bostezo = new Audio("../../sonidos/bostezo.mp3");
@@ -39,21 +28,6 @@ suspiro.volume = 0.8;
 
 // Indica si el bostezo ya se reprodujo.
 let bostezoReproducido = false;
-
-
-// FUNCIÓN PARA REPRODUCIR LA MÚSICA AMBIENTE
-
-function reproducirMusicaAmbiente() {
-
-    musicaAmbiente.play().catch(function() {
-
-        // Si el navegador bloquea la reproducción automática,
-        // se intentará reproducir después de una interacción.
-        console.log("El navegador bloqueó la música automática.");
-
-    });
-
-}
 
 
 // FUNCIÓN PARA REPRODUCIR EL BOSTEZO
@@ -160,21 +134,6 @@ async function cargarDatos() {
 
     actualizarAnimaciones(0);
 
-
-    // RECUPERAR LA POSICIÓN DE LA MÚSICA
-
-    let posicionGuardada = sessionStorage.getItem("posicionMusicaAmbiente");
-
-    if (posicionGuardada !== null) {
-
-        musicaAmbiente.currentTime = Number(posicionGuardada);
-
-    }
-
-    // Intentar continuar la música ambiente.
-    reproducirMusicaAmbiente();
-
-
     // Intentar reproducir el bostezo al entrar a la pantalla.
     reproducirBostezo();
 
@@ -277,10 +236,6 @@ function actualizarPantalla(cantidad) {
 
 document.addEventListener("touchstart", function(event) {
 
-    // Si la música no pudo sonar al entrar,
-    // intentar reproducirla con el primer toque.
-    reproducirMusicaAmbiente();
-
     // Si el bostezo no pudo sonar al entrar,
     // intentar reproducirlo con el primer toque.
     reproducirBostezo();
@@ -361,9 +316,6 @@ function iniciarTemporizador() {
 // BOTÓN PARA CONTINUAR
 
 botonVamos.onclick = function() {
-
-    // Guardar el segundo exacto en el que quedó la música.
-    sessionStorage.setItem("posicionMusicaAmbiente", musicaAmbiente.currentTime);
 
     // Ir al mapa del mundo.
     window.location.href = "../../momento-4/pantalla-1/mapa.html";

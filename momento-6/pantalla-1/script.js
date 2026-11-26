@@ -1,5 +1,5 @@
 
-// ELEMENTOS DE LA PANTALLA
+/* ELEMENTOS DE LA PANTALLA */
 
 let narracion = document.getElementById("narracion");
 let mensaje = document.getElementById("mensaje");
@@ -9,59 +9,12 @@ let cuadroNarracion = document.getElementById("cuadro-narracion");
 let textoFinal = document.getElementById("texto-final");
 
 
-// MÚSICA DE FONDO
-
-let musicaAmbiente = new Audio("../../sonidos/música ambiente.mp3");
-
-// La música continúa en bucle.
-musicaAmbiente.loop = true;
-
-// Ajustar el volumen.
-musicaAmbiente.volume = 0.35;
-
-
 // SONIDO DEL SUSPIRO
 
 let suspiro = new Audio("../../sonidos/suspiro con oh.mp3");
 
 // Ajustar el volumen del suspiro.
 suspiro.volume = 0.8;
-
-
-// FUNCIÓN PARA REPRODUCIR LA MÚSICA AMBIENTE
-
-function reproducirMusicaAmbiente() {
-
-    musicaAmbiente.play().catch(function() {
-
-        // Si el navegador bloquea la reproducción automática,
-        // se intentará reproducir después de una interacción.
-        console.log("El navegador bloqueó la música ambiente.");
-
-    });
-
-}
-
-
-// FUNCIÓN PARA RECUPERAR LA POSICIÓN DE LA MÚSICA
-
-function recuperarMusica() {
-
-    // Buscar el segundo en el que quedó la música
-    // al salir del Momento 5.
-    let posicionGuardada =
-        sessionStorage.getItem("posicionMusicaAmbiente");
-
-    if (posicionGuardada !== null) {
-
-        musicaAmbiente.currentTime = Number(posicionGuardada);
-
-    }
-
-    // Intentar continuar la música.
-    reproducirMusicaAmbiente();
-
-}
 
 
 // CARGAR LOS TEXTOS DEL ARCHIVO JSON
@@ -85,13 +38,13 @@ async function cargarDatos() {
     // MOSTRAR EL BOTÓN
 
     botonFinalizar.textContent = datos.boton;
-
     botonFinalizar.style.display = "block";
 
 
-    // RECUPERAR Y CONTINUAR LA MÚSICA
+    // EL CUADRO DEL MENSAJE FINAL PERMANECE OCULTO
+    // HASTA QUE EL USUARIO PRESIONE FINALIZAR.
 
-    recuperarMusica();
+    textoFinal.style.display = "none";
 
 
     // REPRODUCIR EL SUSPIRO DE PAPÁ NOEL
@@ -111,9 +64,14 @@ async function cargarDatos() {
 
 botonFinalizar.onclick = async function() {
 
-    // DETENER LA MÚSICA AMBIENTE
+    // AVISAR AL INDEX PRINCIPAL QUE DEBE DETENER LA MÚSICA.
 
-    musicaAmbiente.pause();
+    window.parent.postMessage("detener-musicas", "*");
+
+
+    // DETENER EL SUSPIRO SI TODAVÍA ESTÁ SONANDO.
+
+    suspiro.pause();
 
 
     // OCULTAR LOS ELEMENTOS DE LA PRIMERA PANTALLA
