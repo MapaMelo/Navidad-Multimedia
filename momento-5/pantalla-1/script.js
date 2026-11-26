@@ -908,7 +908,7 @@ function mostrarHistoria() {
 
             irAMomento6();
 
-        }, 7000);
+        }, 6000);
 
     }
 

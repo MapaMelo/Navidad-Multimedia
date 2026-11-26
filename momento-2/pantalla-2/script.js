@@ -36,8 +36,23 @@ async function cargarDatos() {
         narracion.textContent = datos.narracionInicial;
     }
 
-    // Muestra el comentario de Papá Noel sobre la canción.
-    comentarioMusica.textContent = datos.comentarioMusica;
+
+    // MOSTRAR EL COMENTARIO DE LA MÚSICA UNA SOLA VEZ.
+
+    // Revisa si el comentario ya apareció durante esta sesión.
+    if (sessionStorage.getItem("comentarioMusicaMostrado") !== "si") {
+
+        // Muestra el comentario de Papá Noel sobre la canción.
+        comentarioMusica.textContent = datos.comentarioMusica;
+
+        // Guarda que el comentario ya fue mostrado.
+        sessionStorage.setItem("comentarioMusicaMostrado", "si");
+
+    } else {
+
+        // Si ya apareció antes, deja el espacio vacío.
+        comentarioMusica.textContent = "";
+    }
 
 }
 
