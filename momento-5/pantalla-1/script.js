@@ -488,8 +488,9 @@ function seleccionarVentana(numero) {
 
 
     // MOSTRAR EL REGALO QUE CORRESPONDE
-
-    imagenRegalo.src = "assets/" + regaloActual + " REGALO M.jpg";
+    // CARGAR LA IMAGEN DEL REGALO CORRESPONDIENTE
+     
+    imagenRegalo.src = "assets/" + regaloActual + ". REGALO M.png";
 
     regalo.style.display = "block";
     regalo.style.transform = "translate(0, 0)";
@@ -907,7 +908,7 @@ function mostrarHistoria() {
 
             irAMomento6();
 
-        }, 8000);
+        }, 7000);
 
     }
 
