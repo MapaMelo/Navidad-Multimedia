@@ -56,7 +56,7 @@ body {
 }
 
 
-/* ESTILO DEL TEXTO */
+/* ESTILO GENERAL DE LOS TEXTOS */
 
 #texto-estanteria p {
     margin: 0;
@@ -65,9 +65,18 @@ body {
     font-weight: bold;
 }
 
+/* COMENTARIO SOBRE LA MÚSICA */
+
+#texto-estanteria p + p {
+    margin-top: 5px;
+    font-size: clamp(10px, 2.6vw, 13px);
+    font-weight: normal;
+}
+
 
 /* ZONAS INTERACTIVAS */
 /* Todas son invisibles y están encima de los juguetes. */
+
 
 /* JUGUETE 1: MATRIUSHKAS */
 

@@ -3,10 +3,24 @@
 // Busca el espacio donde aparecerán los pensamientos de Papá Noel.
 let narracion = document.getElementById("narracion");
 
+// Busca el espacio del comentario sobre la música.
+let comentarioMusica = document.getElementById("comentario-musica");
+
+
+// AUDIOS
+
+// Crea el audio de Christmas Wrapping.
+let musicaAmbiente = new Audio("../../sonidos/música ambiente.mp3");
+
+// Hace que la canción se repita continuamente.
+musicaAmbiente.loop = true;
+
+// Ajusta el volumen.
+musicaAmbiente.volume = 0.35;
+
 
 // FUNCIÓN PARA CARGAR LOS DATOS
 
-// Carga la información guardada en datos.json.
 async function cargarDatos() {
 
     // Busca el archivo JSON.
@@ -33,6 +47,25 @@ async function cargarDatos() {
         narracion.textContent = datos.narracionInicial;
     }
 
+    // Muestra el comentario de Papá Noel sobre la canción.
+    comentarioMusica.textContent = datos.comentarioMusica;
+
+
+    // CONTINUAR LA MÚSICA AMBIENTE
+
+    // Revisa si ya había una posición guardada de la canción.
+    let posicionGuardada = sessionStorage.getItem("posicionMusicaAmbiente");
+
+    // Si existe una posición, continúa desde ese segundo.
+    if (posicionGuardada !== null) {
+        musicaAmbiente.currentTime = Number(posicionGuardada);
+    }
+
+    // Reproduce Christmas Wrapping.
+    musicaAmbiente.play().catch(function() {
+        console.log("El navegador no permitió reproducir la música automáticamente");
+    });
+
 }
 
 
@@ -53,6 +86,9 @@ function seleccionarJuguete(juguete) {
 
         // Guarda el juguete seleccionado.
         localStorage.setItem("jugueteSeleccionado", juguete);
+
+        // Guarda el segundo exacto de la canción.
+        sessionStorage.setItem("posicionMusicaAmbiente", musicaAmbiente.currentTime);
 
         // Va a la pantalla de selección de papel.
         window.location.href = "../pantalla-3/papeles.html";
@@ -92,5 +128,5 @@ document.getElementById("zona-muneca").onclick = function() {
 
 // INICIAR PANTALLA
 
-// Ejecuta la función para mostrar la información.
+// Ejecuta la función para mostrar la información y reproducir la música.
 cargarDatos();

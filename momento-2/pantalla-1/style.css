@@ -15,7 +15,6 @@ body {
 
 /* CONTENEDOR DEL JUEGO */
 
-/* Centra la pantalla del juego en el navegador. */
 #contenedor-juego {
     width: 100%;
     min-height: 100vh;
@@ -28,14 +27,11 @@ body {
 
 /* IMAGEN Y ELEMENTOS SUPERPUESTOS */
 
-/* Define el tamaño y la posición de la pantalla del juego.
-   Los demás elementos se ubican encima de este contenedor. */
 #pantalla {
     width: min(100vw, 430px, 56.25vh);
     position: relative;
 }
 
-/* Hace que la imagen de la mesa ocupe todo el ancho disponible. */
 #mesa-trabajo {
     width: 100%;
     height: auto;
@@ -45,7 +41,6 @@ body {
 
 /* TEXTO PRINCIPAL */
 
-/* Ubica el recuadro de narración en la parte superior. */
 #texto-inicio {
     position: absolute;
 
@@ -60,7 +55,7 @@ body {
     text-align: center;
 }
 
-/* Define la apariencia del texto de narración. */
+/* Apariencia general de los textos. */
 #texto-inicio p {
     margin: 0;
     color: #493629;
@@ -68,10 +63,17 @@ body {
     font-weight: bold;
 }
 
+/* El segundo texto corresponde a la queja sobre la música.
+   Lo hacemos un poco más pequeño para diferenciarlo del primero. */
+#texto-inicio p + p {
+    margin-top: 6px;
+    font-size: clamp(11px, 3vw, 14px);
+    font-weight: normal;
+}
+
 
 /* CONTADOR DE REGALOS */
 
-/* Ubica el contador en la esquina inferior derecha. */
 #contador {
     position: absolute;
     top: 85%;
@@ -85,7 +87,6 @@ body {
     text-align: center;
 }
 
-/* Define la apariencia de los textos del contador. */
 #contador p {
     margin: 2px 0;
     color: #493629;
@@ -96,8 +97,6 @@ body {
 
 /* ANIMACIÓN TAP */
 
-/* Ubica la zona interactiva en el lugar donde antes estaba el botón.
-   También permite que el usuario pueda tocar la animación para continuar. */
 #zona-regalos {
     position: absolute;
 
@@ -105,7 +104,6 @@ body {
     left: 10%;
     width: 25%;
 
-    /* Mantiene la zona cuadrada para que la animación no se deforme. */
     aspect-ratio: 1 / 1;
 
     display: block;
@@ -113,7 +111,6 @@ body {
     cursor: pointer;
 }
 
-/* Hace que la animación ocupe todo el espacio de la zona interactiva. */
 #animacion-tap {
     width: 100%;
     height: 100%;

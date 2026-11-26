@@ -1,4 +1,3 @@
-
 // REINICIAR LOS DATOS DE LA PARTIDA
 
 function reiniciarPartida() {
@@ -21,67 +20,183 @@ function reiniciarPartida() {
 
 // ELEMENTOS DE LA PANTALLA
 
-// Busca los elementos del HTML utilizando sus identificadores.
 let titulo = document.getElementById("titulo");
 let narracion = document.getElementById("narracion");
+let botonComenzar = document.getElementById("boton-comenzar");
+
+
+// VARIABLES DE LOS AUDIOS
+
+let musicaFeliz;
+let reloj;
+let ohOtraVez;
+
+let musicaIniciada = false;
+let ohReproducido = false;
 
 
 // FUNCIÓN PARA CARGAR LOS DATOS
 
-// async permite utilizar await para esperar a que se cargue la información.
 async function cargarDatos() {
 
     // Busca el archivo datos.json.
     let respuesta = await fetch("datos.json");
 
-    // Convierte la información del JSON para poder utilizarla en JavaScript.
+    // Convierte la información del JSON.
     let datos = await respuesta.json();
 
 
     // MOSTRAR LOS TEXTOS
 
-    // Coloca el título del JSON dentro del primer recuadro.
     titulo.textContent = datos.titulo;
-
-    // Coloca el pensamiento de Papá Noel dentro del segundo recuadro.
     narracion.textContent = datos.narracion;
 
 
     // AUDIOS
 
-    // Crea un reproductor para la música navideña.
-    let musica = new Audio(datos.audio.musica);
+    // Música feliz que acompaña el inicio.
+    musicaFeliz = new Audio("../../sonidos/música feliz.mp3");
 
-    // Crea un reproductor para el sonido del reloj.
-    let reloj = new Audio(datos.audio.reloj);
+    // Sonido del reloj que ya teníamos en el proyecto.
+    reloj = new Audio(datos.audio.reloj);
 
-    // Hace que la música se repita mientras permanezca abierta la pantalla.
-    musica.loop = true;
+    // Sonido de Papá Noel cuando piensa: "Otra vez...".
+    ohOtraVez = new Audio("../../sonidos/oh de otra vez.mp3");
 
-    // Hace que el tic-tac también se repita.
+
+    // La música feliz se repite mientras esté activa.
+    musicaFeliz.loop = true;
+
+    // El reloj también se repite.
     reloj.loop = true;
 
-    // Ajusta el volumen de la música. El valor va de 0 a 1.
-    musica.volume = 0.35;
 
-    // Ajusta el volumen del reloj.
+    // VOLUMEN DE LOS AUDIOS
+
+    musicaFeliz.volume = 0.35;
     reloj.volume = 0.25;
+    ohOtraVez.volume = 0.8;
 
 
-    // INTENTAR REPRODUCIR LOS AUDIOS
+    // REPRODUCIR LA MÚSICA FELIZ
 
-    // Intenta iniciar la música cuando se carga la pantalla.
-    // catch permite manejar el caso en que el navegador bloquee la reproducción automática.
-    musica.play().catch(function() {
-        console.log("El navegador no permitió reproducir la música automáticamente");
+    musicaFeliz.play().then(function() {
+
+        // Indica que la música sí pudo comenzar.
+        musicaIniciada = true;
+
+    }).catch(function() {
+
+        // Algunos navegadores bloquean la música automática.
+        console.log("El navegador bloqueó la reproducción automática.");
+
     });
 
-    // Intenta iniciar el sonido del reloj.
+
+    // REPRODUCIR EL RELOJ
+
     reloj.play().catch(function() {
-        console.log("El navegador no permitió reproducir el reloj automáticamente");
+
+        console.log("El navegador bloqueó el sonido del reloj.");
+
+    });
+
+
+    // REPRODUCIR OH DE OTRA VEZ
+
+    // Espera hasta que la música llegue al segundo 5.
+    musicaFeliz.addEventListener("timeupdate", function() {
+
+        if (musicaFeliz.currentTime >= 5 && ohReproducido === false) {
+
+            // Marca el sonido para que no se repita.
+            ohReproducido = true;
+
+            // Empieza a reproducir desde el segundo 5 del archivo.
+            ohOtraVez.currentTime = 5;
+
+            ohOtraVez.play().then(function() {
+
+                // Un segundo después, detiene el sonido.
+                setTimeout(function() {
+
+                    ohOtraVez.pause();
+
+                    // Deja el audio preparado para otra reproducción.
+                    ohOtraVez.currentTime = 5;
+
+                }, 1000);
+
+            }).catch(function() {
+
+                console.log("No se pudo reproducir oh de otra vez.");
+
+            });
+
+        }
+
     });
 
 }
+
+
+// BOTÓN PARA COMENZAR
+
+botonComenzar.addEventListener("click", function(event) {
+
+    // Evita que el enlace cambie de pantalla inmediatamente.
+    event.preventDefault();
+
+
+    // FUNCIÓN PARA PASAR A MOMENTO 2
+
+    function pasarAMomento2() {
+
+        // Guarda el segundo exacto en el que quedó la música.
+        sessionStorage.setItem("posicionMusicaFeliz", musicaFeliz.currentTime);
+
+        // Indica que la música feliz estaba activa.
+        sessionStorage.setItem("musicaFelizActiva", "true");
+
+        // Guarda si ya se reprodujo el sonido de "oh de otra vez".
+        sessionStorage.setItem("ohOtraVezReproducido", ohReproducido);
+
+        // Pasa a la pantalla de preparación de regalos.
+        window.location.href = botonComenzar.href;
+
+    }
+
+
+    // Si la música ya está sonando, pasa directamente.
+    if (musicaIniciada === true) {
+
+        pasarAMomento2();
+
+    } else {
+
+        // Si el navegador bloqueó la música automática,
+        // intenta iniciarla con el clic del usuario.
+        musicaFeliz.play().then(function() {
+
+            musicaIniciada = true;
+
+            // Espera un segundo para que alcance a escucharse.
+            setTimeout(function() {
+
+                pasarAMomento2();
+
+            }, 1000);
+
+        }).catch(function() {
+
+            // Si tampoco se puede reproducir, continúa normalmente.
+            pasarAMomento2();
+
+        });
+
+    }
+
+});
 
 
 // INICIAR LA PANTALLA
@@ -89,5 +204,5 @@ async function cargarDatos() {
 // Borra el progreso anterior porque estamos comenzando una partida nueva.
 reiniciarPartida();
 
-// Llama a la función para cargar los textos y preparar los audios.
+// Carga los textos y prepara los audios.
 cargarDatos();

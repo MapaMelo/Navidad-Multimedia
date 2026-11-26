@@ -15,11 +15,10 @@
     <!-- Conecta el archivo de estilos. -->
     <link rel="stylesheet" href="style.css">
 
-    <!-- Conecta el reproductor de animaciones Lottie.
-         Este permite mostrar animaciones creadas a partir de archivos JSON. -->
+    <!-- Conecta el reproductor de animaciones Lottie. -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js" defer></script>
 
-    <!-- Conecta JavaScript y espera a que cargue el HTML. -->
+    <!-- Conecta JavaScript. -->
     <script src="script.js" defer></script>
 
 </head>
@@ -35,9 +34,15 @@
             <!-- Imagen de la mesa de trabajo. -->
             <img id="mesa-trabajo" src="assets/mesa-trabajo.jpg" alt="Mesa de trabajo de Papá Noel">
 
-            <!-- Recuadro con la instrucción de Papá Noel. -->
+            <!-- Recuadro con los textos de Papá Noel. -->
             <div id="texto-inicio">
+
+                <!-- Texto principal de la pantalla. -->
                 <p id="titulo"></p>
+
+                <!-- Queja de Papá Noel sobre la música. -->
+                <p id="narracion"></p>
+
             </div>
 
             <!-- Contador de regalos terminados. -->
@@ -46,11 +51,10 @@
                 <p id="cantidad-regalos">0/6</p>
             </div>
 
-            <!-- Zona que permite pasar a la siguiente pantalla.
-                 Al tocar la animación, el usuario puede continuar. -->
+            <!-- Zona que permite pasar a la siguiente pantalla. -->
             <a id="zona-regalos" href="../pantalla-2/estanteria.html">
 
-                <!-- Espacio donde aparecerá la animación de tap. -->
+                <!-- Espacio donde aparece la animación de tap. -->
                 <div id="animacion-tap"></div>
 
             </a>

@@ -7,6 +7,7 @@ let guiaGesto = document.getElementById("guia-gesto");
 let botonVamos = document.getElementById("boton-vamos");
 
 // GUARDAR LOS CINCO ESPACIOS DE LAS ANIMACIONES
+
 let animacionesTap = [
     document.getElementById("dedo-1"),
     document.getElementById("dedo-2"),
@@ -16,6 +17,70 @@ let animacionesTap = [
 ];
 
 
+// MÚSICA DE FONDO
+
+let musicaAmbiente = new Audio("../../sonidos/música ambiente.mp3");
+
+// La música se reproduce en bucle.
+musicaAmbiente.loop = true;
+
+// Ajustar el volumen de la música.
+musicaAmbiente.volume = 0.35;
+
+
+// SONIDOS
+
+let bostezo = new Audio("../../sonidos/bostezo.mp3");
+let suspiro = new Audio("../../sonidos/suspiro con oh.mp3");
+
+// Ajustar el volumen de los sonidos.
+bostezo.volume = 0.8;
+suspiro.volume = 0.8;
+
+// Indica si el bostezo ya se reprodujo.
+let bostezoReproducido = false;
+
+
+// FUNCIÓN PARA REPRODUCIR LA MÚSICA AMBIENTE
+
+function reproducirMusicaAmbiente() {
+
+    musicaAmbiente.play().catch(function() {
+
+        // Si el navegador bloquea la reproducción automática,
+        // se intentará reproducir después de una interacción.
+        console.log("El navegador bloqueó la música automática.");
+
+    });
+
+}
+
+
+// FUNCIÓN PARA REPRODUCIR EL BOSTEZO
+
+function reproducirBostezo() {
+
+    // Evitar que el bostezo se reproduzca más de una vez.
+    if (bostezoReproducido === false) {
+
+        bostezo.play().then(function() {
+
+            // Indicar que el sonido ya comenzó.
+            bostezoReproducido = true;
+
+        }).catch(function() {
+
+            // Si el navegador bloquea el sonido,
+            // se intentará reproducir en el primer toque.
+            console.log("El navegador bloqueó el bostezo automático.");
+
+        });
+
+    }
+
+}
+
+
 // ANIMACIONES DE LOS CINCO DEDOS
 
 // Cargar una animación de tap en cada uno de los cinco espacios.
@@ -23,19 +88,10 @@ for (let i = 0; i < 5; i++) {
 
     lottie.loadAnimation({
 
-        // Lugar donde aparecerá cada animación.
         container: animacionesTap[i],
-
-        // Dibujar la animación utilizando SVG.
         renderer: "svg",
-
-        // Repetir la animación continuamente.
         loop: true,
-
-        // Reproducir automáticamente.
         autoplay: true,
-
-        // Utilizar el mismo archivo de animación tap.
         path: "../../momento-2/pantalla-1/assets/tap.json"
 
     });
@@ -47,7 +103,6 @@ for (let i = 0; i < 5; i++) {
 
 document.addEventListener("contextmenu", function(event) {
 
-    // Impedir que aparezcan las opciones del navegador.
     event.preventDefault();
 
 });
@@ -55,22 +110,11 @@ document.addEventListener("contextmenu", function(event) {
 
 // VARIABLES DE LA INTERACCIÓN
 
-// Guarda la cantidad de dedos apoyados.
 let cantidadDedos = 0;
-
-// Guarda el tiempo que llevan los cinco dedos apoyados.
 let tiempo = 0;
-
-// Guarda el temporizador.
 let temporizador = null;
-
-// Indica si ya se completó la preparación del trineo.
 let preparacionCompletada = false;
-
-// Cuenta los intentos fallidos del usuario.
 let intentosFallidos = 0;
-
-// Guarda la información del archivo JSON.
 let datos;
 
 
@@ -78,7 +122,6 @@ let datos;
 
 function actualizarAnimaciones(cantidad) {
 
-    // Mostrar solamente la animación del siguiente dedo que debe apoyarse.
     for (let i = 0; i < 5; i++) {
 
         if (i === cantidad) {
@@ -93,7 +136,6 @@ function actualizarAnimaciones(cantidad) {
 
     }
 
-    // Cuando ya están apoyados los cinco dedos, ocultar todas las animaciones.
     if (cantidad === 5) {
 
         guiaGesto.style.display = "none";
@@ -111,17 +153,30 @@ function actualizarAnimaciones(cantidad) {
 
 async function cargarDatos() {
 
-    // Busca el archivo JSON.
     let respuesta = await fetch("datos.json");
-
-    // Convierte su contenido para utilizarlo en JavaScript.
     datos = await respuesta.json();
 
-    // Muestra el pensamiento inicial.
     narracion.textContent = datos.narraciones[0];
 
-    // Al principio aparece la primera animación.
     actualizarAnimaciones(0);
+
+
+    // RECUPERAR LA POSICIÓN DE LA MÚSICA
+
+    let posicionGuardada = sessionStorage.getItem("posicionMusicaAmbiente");
+
+    if (posicionGuardada !== null) {
+
+        musicaAmbiente.currentTime = Number(posicionGuardada);
+
+    }
+
+    // Intentar continuar la música ambiente.
+    reproducirMusicaAmbiente();
+
+
+    // Intentar reproducir el bostezo al entrar a la pantalla.
+    reproducirBostezo();
 
 }
 
@@ -130,12 +185,10 @@ async function cargarDatos() {
 
 function actualizarPantalla(cantidad) {
 
-    // No cambia la pantalla si ya terminó la preparación.
     if (preparacionCompletada) {
         return;
     }
 
-    // Guarda la cantidad actual de dedos.
     cantidadDedos = cantidad;
 
 
@@ -178,7 +231,6 @@ function actualizarPantalla(cantidad) {
 
     if (cantidadDedos === 5) {
 
-        // Iniciar el temporizador si todavía no está funcionando.
         if (temporizador === null) {
 
             iniciarTemporizador();
@@ -187,15 +239,9 @@ function actualizarPantalla(cantidad) {
 
     } else {
 
-        // COMPROBAR SI EL USUARIO HABÍA APOYADO LOS CINCO DEDOS
-
         if (temporizador !== null) {
 
-            // Aumentar la cantidad de intentos fallidos.
             intentosFallidos = intentosFallidos + 1;
-
-
-            // MOSTRAR UN COMENTARIO SEGÚN EL INTENTO
 
             if (intentosFallidos === 1) {
 
@@ -231,17 +277,20 @@ function actualizarPantalla(cantidad) {
 
 document.addEventListener("touchstart", function(event) {
 
-    // Contar los dedos que están apoyados.
+    // Si la música no pudo sonar al entrar,
+    // intentar reproducirla con el primer toque.
+    reproducirMusicaAmbiente();
+
+    // Si el bostezo no pudo sonar al entrar,
+    // intentar reproducirlo con el primer toque.
+    reproducirBostezo();
+
     let cantidad = event.touches.length;
 
-    // Como máximo se reconocen cinco dedos.
     if (cantidad > 5) {
-
         cantidad = 5;
-
     }
 
-    // Actualizar la pantalla.
     actualizarPantalla(cantidad);
 
 });
@@ -251,10 +300,8 @@ document.addEventListener("touchstart", function(event) {
 
 document.addEventListener("touchend", function(event) {
 
-    // Contar cuántos dedos siguen apoyados.
     let cantidad = event.touches.length;
 
-    // Actualizar la pantalla.
     actualizarPantalla(cantidad);
 
 });
@@ -264,10 +311,8 @@ document.addEventListener("touchend", function(event) {
 
 document.addEventListener("touchcancel", function(event) {
 
-    // Contar cuántos dedos siguen apoyados.
     let cantidad = event.touches.length;
 
-    // Actualizar la pantalla.
     actualizarPantalla(cantidad);
 
 });
@@ -277,31 +322,34 @@ document.addEventListener("touchcancel", function(event) {
 
 function iniciarTemporizador() {
 
-    // Comenzar a contar desde cero.
     tiempo = 0;
 
-    // Revisar el tiempo cada segundo.
     temporizador = setInterval(function() {
 
-        // Aumentar el contador de segundos.
         tiempo = tiempo + 1;
 
-        // Comprobar si ya pasaron cinco segundos.
         if (tiempo >= 5) {
 
-            // Detener el temporizador.
             clearInterval(temporizador);
 
             temporizador = null;
 
-            // Indicar que la preparación terminó.
             preparacionCompletada = true;
 
-            // Ocultar la guía.
             guiaGesto.style.display = "none";
 
-            // Mostrar el botón para continuar.
             botonVamos.style.display = "block";
+
+
+            // Reproducir el suspiro cuando termina la preparación.
+
+            suspiro.currentTime = 0;
+
+            suspiro.play().catch(function() {
+
+                console.log("No se pudo reproducir el suspiro.");
+
+            });
 
         }
 
@@ -314,7 +362,10 @@ function iniciarTemporizador() {
 
 botonVamos.onclick = function() {
 
-    // Pasar al mapa del siguiente momento.
+    // Guardar el segundo exacto en el que quedó la música.
+    sessionStorage.setItem("posicionMusicaAmbiente", musicaAmbiente.currentTime);
+
+    // Ir al mapa del mundo.
     window.location.href = "../../momento-4/pantalla-1/mapa.html";
 
 };

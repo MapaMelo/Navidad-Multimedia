@@ -1,4 +1,5 @@
-// ELEMENTOS DE LA PANTALLA
+
+/* ELEMENTOS DE LA PANTALLA */
 
 let fachada = document.getElementById("fachada");
 let narracion = document.getElementById("narracion");
@@ -35,6 +36,316 @@ let lanzamientoEnCurso = false;
 let entregaEnCurso = false;
 
 let intentosFallidos = 0;
+
+
+// SONIDOS Y MÚSICA
+
+// Música que acompaña el recorrido.
+let musicaAmbiente = new Audio("../../sonidos/música ambiente.mp3");
+
+// Sonido que aparece cuando el regalo entra por la ventana.
+let sonidoVidrio = new Audio("../../sonidos/vidrio.mp3");
+
+// Sonido cuando falla el lanzamiento.
+let sonidoFallo = new Audio("../../sonidos/oh grave.mp3");
+
+// Sonidos de las diferentes escenas.
+let sonidoNavidad = new Audio("../../sonidos/música feliz.mp3");
+let sonidoChimenea = new Audio("../../sonidos/chimenea.mp3");
+let sonidoRonquido = new Audio("../../sonidos/ronquido.mp3");
+let sonidoPerro = new Audio("../../sonidos/ladrido.mp3");
+let sonidoPasos = new Audio("../../sonidos/pasos.mp3");
+let sonidoRisas = new Audio("../../sonidos/risas.mp3");
+
+// La música ambiente se repite durante el recorrido.
+musicaAmbiente.loop = true;
+musicaAmbiente.volume = 0.35;
+
+// La música navideña y la chimenea se mantienen mientras
+// esté activa la escena de Navidad.
+sonidoNavidad.loop = true;
+sonidoChimenea.loop = true;
+
+// Ajustar el volumen de los sonidos.
+sonidoVidrio.volume = 0.8;
+sonidoFallo.volume = 0.8;
+sonidoNavidad.volume = 0.7;
+sonidoChimenea.volume = 0.8;
+sonidoRonquido.volume = 0.8;
+sonidoPerro.volume = 0.8;
+sonidoPasos.volume = 0.8;
+sonidoRisas.volume = 0.8;
+
+
+// VARIABLE PARA CONTROLAR LA SECUENCIA DE SONIDOS
+
+// Permite evitar que una escena anterior siga reproduciéndose
+// cuando el usuario selecciona otra ventana.
+let secuenciaAudio = 0;
+
+
+// FUNCIÓN PARA REPRODUCIR LA MÚSICA AMBIENTE
+
+function reproducirMusicaAmbiente() {
+
+    musicaAmbiente.play().catch(function() {
+
+        console.log("El navegador bloqueó la música ambiente.");
+
+    });
+
+}
+
+
+// FUNCIÓN PARA DETENER LOS SONIDOS DE LAS ESCENAS
+
+function detenerAudiosVentana() {
+
+    // Detener el sonido del vidrio.
+    sonidoVidrio.pause();
+    sonidoVidrio.currentTime = 0;
+    sonidoVidrio.onended = null;
+
+    // Detener la música y la chimenea de Navidad.
+    sonidoNavidad.pause();
+    sonidoNavidad.currentTime = 0;
+
+    sonidoChimenea.pause();
+    sonidoChimenea.currentTime = 0;
+
+    // Detener los sonidos de las demás escenas.
+    sonidoRonquido.pause();
+    sonidoRonquido.currentTime = 0;
+    sonidoRonquido.onended = null;
+
+    sonidoPerro.pause();
+    sonidoPerro.currentTime = 0;
+    sonidoPerro.onended = null;
+
+    sonidoPasos.pause();
+    sonidoPasos.currentTime = 0;
+    sonidoPasos.onended = null;
+
+    sonidoRisas.pause();
+    sonidoRisas.currentTime = 0;
+    sonidoRisas.onended = null;
+
+}
+
+
+// FUNCIÓN PARA DETENER UNA SECUENCIA DE SONIDOS
+
+function detenerSecuenciaSonido() {
+
+    // Cambiar el número de secuencia para invalidar
+    // cualquier reproducción anterior.
+    secuenciaAudio = secuenciaAudio + 1;
+
+    detenerAudiosVentana();
+
+}
+
+
+// FUNCIÓN PARA CONTINUAR LA MÚSICA DESPUÉS DE UNA ESCENA
+
+function continuarMusicaAmbiente() {
+
+    // Si la música ya está sonando, no hacer nada.
+    if (musicaAmbiente.paused) {
+
+        reproducirMusicaAmbiente();
+
+    }
+
+}
+
+
+// FUNCIÓN PARA REPRODUCIR EL SONIDO DE UNA ESCENA
+
+function reproducirSonidoEscena(nombreEscena, numeroSecuencia) {
+
+    // Revisar que esta siga siendo la escena actual.
+    if (numeroSecuencia !== secuenciaAudio) {
+        return;
+    }
+
+    // ESCENA DE NAVIDAD
+
+    if (nombreEscena === "navidad") {
+
+        // Reproducir música navideña.
+        sonidoNavidad.currentTime = 0;
+
+        sonidoNavidad.play().catch(function() {
+            console.log("No se pudo reproducir la música navideña.");
+        });
+
+        // Reproducir el sonido de la chimenea.
+        sonidoChimenea.currentTime = 0;
+
+        sonidoChimenea.play().catch(function() {
+            console.log("No se pudo reproducir la chimenea.");
+        });
+
+        // Ambos sonidos continuarán hasta que se seleccione
+        // otra ventana.
+
+    }
+
+
+    // ESCENA DE ALGUIEN DURMIENDO
+
+    else if (nombreEscena === "durmiendo") {
+
+        sonidoRonquido.currentTime = 0;
+
+        sonidoRonquido.onended = function() {
+
+            if (numeroSecuencia === secuenciaAudio) {
+                continuarMusicaAmbiente();
+            }
+
+        };
+
+        sonidoRonquido.play().catch(function() {
+
+            console.log("No se pudo reproducir el ronquido.");
+            continuarMusicaAmbiente();
+
+        });
+
+    }
+
+
+    // ESCENA DEL PERRO
+
+    else if (nombreEscena === "perro") {
+
+        sonidoPerro.currentTime = 0;
+
+        sonidoPerro.onended = function() {
+
+            if (numeroSecuencia === secuenciaAudio) {
+                continuarMusicaAmbiente();
+            }
+
+        };
+
+        sonidoPerro.play().catch(function() {
+
+            console.log("No se pudo reproducir el ladrido.");
+            continuarMusicaAmbiente();
+
+        });
+
+    }
+
+
+    // ESCENA DEL DESCUBRIMIENTO
+
+    else if (nombreEscena === "descubrimiento") {
+
+        sonidoPasos.currentTime = 0;
+
+        sonidoPasos.onended = function() {
+
+            if (numeroSecuencia === secuenciaAudio) {
+                continuarMusicaAmbiente();
+            }
+
+        };
+
+        sonidoPasos.play().catch(function() {
+
+            console.log("No se pudieron reproducir los pasos.");
+            continuarMusicaAmbiente();
+
+        });
+
+    }
+
+
+    // ESCENA DE CELEBRACIÓN
+
+    else if (nombreEscena === "celebracion") {
+
+        sonidoRisas.currentTime = 0;
+
+        sonidoRisas.onended = function() {
+
+            if (numeroSecuencia === secuenciaAudio) {
+                continuarMusicaAmbiente();
+            }
+
+        };
+
+        sonidoRisas.play().catch(function() {
+
+            console.log("No se pudieron reproducir las risas.");
+            continuarMusicaAmbiente();
+
+        });
+
+    }
+
+
+    // ESCENA DE LAS GALLETAS
+
+    else {
+
+        // Esta escena no tiene un sonido adicional.
+        // Por eso la música ambiente puede continuar.
+        continuarMusicaAmbiente();
+
+    }
+
+}
+
+
+// FUNCIÓN PARA INICIAR LA SECUENCIA DE UNA ENTREGA
+
+function iniciarSecuenciaSonido(claveVentana) {
+
+    // Crear un nuevo número de secuencia.
+    secuenciaAudio = secuenciaAudio + 1;
+
+    let numeroSecuencia = secuenciaAudio;
+
+    // Detener cualquier sonido de una escena anterior.
+    detenerAudiosVentana();
+
+    // Pausar la música ambiente mientras suena el vidrio
+    // y la escena de la ventana.
+    musicaAmbiente.pause();
+
+    // Reiniciar el sonido del vidrio.
+    sonidoVidrio.currentTime = 0;
+
+    // Cuando termine el vidrio, reproducir el sonido
+    // correspondiente a la escena.
+    sonidoVidrio.onended = function() {
+
+        reproducirSonidoEscena(
+            claveVentana,
+            numeroSecuencia
+        );
+
+    };
+
+    // Reproducir el sonido del vidrio.
+    sonidoVidrio.play().catch(function() {
+
+        console.log("No se pudo reproducir el sonido del vidrio.");
+
+        // Si no se puede reproducir, continuar con la escena.
+        reproducirSonidoEscena(
+            claveVentana,
+            numeroSecuencia
+        );
+
+    });
+
+}
 
 
 // CONFIGURACIÓN DE LAS FACHADAS Y LAS VENTANAS
@@ -133,7 +444,7 @@ async function cargarDatos() {
     textoInstruccion.textContent = datos.instruccionInicial;
 
     // MOSTRAR LA INSTRUCCIÓN SOLO SI TODAVÍA NO SE HA
-    // SELECCIONADO NINGUNA VENTANA NI COMPLETADO ENTREGAS.
+    // COMPLETADO NINGUNA ENTREGA.
 
     if (ventanasEntregadas.length === 0) {
         instruccion.style.display = "block";
@@ -141,12 +452,14 @@ async function cargarDatos() {
         instruccion.style.display = "none";
     }
 
+
     // BUSCAR LA FACHADA DEL PAÍS SELECCIONADO
 
     if (fachadas[lugarSeleccionado]) {
 
         fachada.style.backgroundImage =
             "url('" + fachadas[lugarSeleccionado].imagen + "')";
+
 
         // CARGAR LAS SEIS VENTANAS
 
@@ -187,6 +500,23 @@ async function cargarDatos() {
         }
 
         actualizarContador();
+
+
+        // RECUPERAR LA POSICIÓN DE LA MÚSICA AMBIENTE
+
+        let posicionGuardada =
+            sessionStorage.getItem("posicionMusicaAmbiente");
+
+        if (posicionGuardada !== null) {
+
+            musicaAmbiente.currentTime = Number(posicionGuardada);
+
+        }
+
+        // REPRODUCIR LA MÚSICA AMBIENTE
+
+        reproducirMusicaAmbiente();
+
 
         // SI YA SE COMPLETARON LAS SEIS ENTREGAS,
         // MOSTRAR EL MENSAJE FINAL.
@@ -232,14 +562,25 @@ function seleccionarVentana(numero) {
 
     }
 
+    // DETENER LOS SONIDOS DE LA ESCENA ANTERIOR
+
+    detenerSecuenciaSonido();
+
+    // Si la música ambiente estaba pausada,
+    // volver a reproducirla mientras se prepara el siguiente regalo.
+    continuarMusicaAmbiente();
+
+
     // GUARDAR LA VENTANA SELECCIONADA
 
     ventanaSeleccionada = numero;
     localStorage.setItem("ventanaSeleccionada", numero);
 
+
     // OCULTAR DEFINITIVAMENTE LA INSTRUCCIÓN DE DOBLE TOQUE
 
     instruccion.style.display = "none";
+
 
     // QUITAR EL RESALTADO ANTERIOR
 
@@ -250,12 +591,14 @@ function seleccionarVentana(numero) {
 
     }
 
+
     // RESALTAR LA NUEVA VENTANA
 
     let zonaSeleccionada =
         document.getElementById("zona-ventana-" + numero);
 
     zonaSeleccionada.classList.add("seleccionada");
+
 
     // MOSTRAR EL REGALO QUE CORRESPONDE
 
@@ -267,9 +610,11 @@ function seleccionarVentana(numero) {
     regalo.classList.remove("volando");
     regalo.classList.remove("fallido");
 
+
     // MOSTRAR LA ANIMACIÓN DE SWIPE
 
     animacionSwipe.style.display = "block";
+
 
     // ACTUALIZAR LA NARRACIÓN DE PAPÁ NOEL
 
@@ -357,6 +702,7 @@ document.addEventListener("pointerup", function(event) {
         diferenciaX * diferenciaX + diferenciaY * diferenciaY
     );
 
+
     // CALCULAR EL CENTRO DE LA VENTANA SELECCIONADA
 
     let zona = document.getElementById(
@@ -367,6 +713,7 @@ document.addEventListener("pointerup", function(event) {
 
     let centroX = rectangulo.left + rectangulo.width / 2;
     let centroY = rectangulo.top + rectangulo.height / 2;
+
 
     // COMPROBAR SI EL MOVIMIENTO FUE HACIA LA VENTANA
 
@@ -379,6 +726,7 @@ document.addEventListener("pointerup", function(event) {
         (puntoFinalX - centroX) * (puntoFinalX - centroX) +
         (puntoFinalY - centroY) * (puntoFinalY - centroY)
     );
+
 
     // EL LANZAMIENTO NECESITA DISTANCIA Y DIRECCIÓN CORRECTAS
 
@@ -406,6 +754,7 @@ function lanzarRegalo() {
     let rectangulo = zona.getBoundingClientRect();
     let regaloRectangulo = regalo.getBoundingClientRect();
 
+
     // CALCULAR HACIA DÓNDE DEBE VOLAR EL REGALO
 
     let diferenciaX =
@@ -416,9 +765,11 @@ function lanzarRegalo() {
         rectangulo.top + rectangulo.height / 2 -
         (regaloRectangulo.top + regaloRectangulo.height / 2);
 
+
     // BLOQUEAR OTRAS ACCIONES DURANTE LA ANIMACIÓN
 
     lanzamientoEnCurso = true;
+
 
     // ANIMAR EL REGALO
 
@@ -427,6 +778,7 @@ function lanzarRegalo() {
     regalo.style.transform =
         "translate(" + diferenciaX + "px, " + diferenciaY +
         "px) scale(0.2) rotate(20deg)";
+
 
     // DESPUÉS DE LA ANIMACIÓN, CONFIRMAR LA ENTREGA
 
@@ -447,10 +799,23 @@ function fallarLanzamiento() {
     intentosFallidos = intentosFallidos + 1;
     lanzamientoEnCurso = true;
 
+
+    // REPRODUCIR EL SONIDO DE ERROR
+
+    sonidoFallo.currentTime = 0;
+
+    sonidoFallo.play().catch(function() {
+
+        console.log("No se pudo reproducir el sonido del fallo.");
+
+    });
+
+
     // MOSTRAR EL MOVIMIENTO DE CAÍDA
 
     regalo.classList.add("fallido");
     regalo.style.transform = "translate(0, 90px) rotate(25deg)";
+
 
     // ELEGIR EL COMENTARIO DE PAPÁ NOEL
 
@@ -462,6 +827,7 @@ function fallarLanzamiento() {
 
     narracion.textContent = datos.fallos[posicionMensaje];
 
+
     // DEVOLVER EL REGALO A SU POSICIÓN
 
     setTimeout(function() {
@@ -471,6 +837,7 @@ function fallarLanzamiento() {
         regalo.classList.remove("fallido");
 
         lanzamientoEnCurso = false;
+
 
         // VOLVER A ACTIVAR LA TRANSICIÓN
 
@@ -496,6 +863,7 @@ function completarEntrega() {
         JSON.stringify(ventanasEntregadas)
     );
 
+
     // MOSTRAR LA VENTANA ILUMINADA
 
     let imagen = document.getElementById(
@@ -503,6 +871,21 @@ function completarEntrega() {
     );
 
     imagen.style.display = "block";
+
+
+    // IDENTIFICAR LA ESCENA QUE CORRESPONDE A ESTA VENTANA
+
+    let numeroPais = fachadas[lugarSeleccionado].numero;
+
+    let claveVentana = numeroPais + "." + ventanaSeleccionada;
+
+    let nombreEscena = datos.escenasPorVentana[claveVentana];
+
+
+    // INICIAR LA SECUENCIA DE SONIDOS DE LA ENTREGA
+
+    iniciarSecuenciaSonido(nombreEscena);
+
 
     // QUITAR EL RESALTADO Y DESACTIVAR LA VENTANA
 
@@ -513,19 +896,23 @@ function completarEntrega() {
     zona.classList.remove("seleccionada");
     zona.classList.add("entregada");
 
+
     // OCULTAR EL REGALO
 
     regalo.style.display = "none";
     regalo.style.transform = "translate(0, 0)";
     regalo.classList.remove("volando");
 
+
     // OCULTAR LA ANIMACIÓN DE SWIPE
 
     animacionSwipe.style.display = "none";
 
+
     // ACTUALIZAR EL CONTADOR
 
     actualizarContador();
+
 
     // MOSTRAR LA REACCIÓN DE PAPÁ NOEL
 
@@ -543,10 +930,12 @@ function mostrarHistoria() {
     let numeroPais = fachadas[lugarSeleccionado].numero;
     let claveVentana = numeroPais + "." + ventanaSeleccionada;
 
+
     // BUSCAR QUÉ ESCENA CORRESPONDE A ESA VENTANA
 
     let nombreEscena = datos.escenasPorVentana[claveVentana];
     let historia = datos.historias[nombreEscena];
+
 
     // MOSTRAR LA REACCIÓN DE PAPÁ NOEL EN LA PARTE SUPERIOR
 
@@ -565,9 +954,11 @@ function mostrarHistoria() {
 
     }
 
+
     // NO VOLVER A MOSTRAR LA INSTRUCCIÓN DE DOBLE TOQUE
 
     instruccion.style.display = "none";
+
 
     // INDICAR QUE YA SE PUEDE SELECCIONAR OTRA VENTANA
 
@@ -578,14 +969,13 @@ function mostrarHistoria() {
         entregaEnCurso = false;
         ventanaSeleccionada = null;
 
+
         // PREPARAR EL SIGUIENTE REGALO
 
         regaloActual = ventanasEntregadas.length + 1;
 
         localStorage.setItem("regaloActual", regaloActual);
         localStorage.removeItem("ventanaSeleccionada");
-
-        intentosFallidos = 0;
 
     } else {
 
@@ -595,12 +985,35 @@ function mostrarHistoria() {
 
         setTimeout(function() {
 
-            window.location.href =
-                "../../momento-6/pantalla-1/cansado.html";
+            irAMomento6();
 
         }, 3000);
 
     }
+
+}
+
+
+// FUNCIÓN PARA PASAR AL MOMENTO 6
+
+function irAMomento6() {
+
+    // Detener los sonidos de la última escena.
+    detenerSecuenciaSonido();
+
+    // Guardar la posición de la música ambiente para
+    // que el Momento 6 pueda continuar desde ese segundo.
+    sessionStorage.setItem(
+        "posicionMusicaAmbiente",
+        musicaAmbiente.currentTime
+    );
+
+    // Detener la música en esta pantalla.
+    musicaAmbiente.pause();
+
+    // Pasar al Momento 6.
+    window.location.href =
+        "../../momento-6/pantalla-1/cansado.html";
 
 }
 
@@ -614,6 +1027,7 @@ function mostrarFinal() {
     animacionSwipe.style.display = "none";
     instruccion.style.display = "none";
 
+
     // MOSTRAR EL MENSAJE FINAL
 
     narracion.textContent =
@@ -621,12 +1035,12 @@ function mostrarFinal() {
 
     entregaEnCurso = true;
 
+
     // PASAR AL MOMENTO 6 DESPUÉS DE DAR TIEMPO PARA LEER
 
     setTimeout(function() {
 
-        window.location.href =
-            "../../momento-6/pantalla-1/cansado.html";
+        irAMomento6();
 
     }, 7000);
 
@@ -636,11 +1050,13 @@ function mostrarFinal() {
 // CARGAR LA ANIMACIÓN DE SWIPE
 
 lottie.loadAnimation({
+
     container: animacionSwipe,
     renderer: "svg",
     loop: true,
     autoplay: true,
     path: "../../momento-2/pantalla-4/assets/gesto.json"
+
 });
 
 
