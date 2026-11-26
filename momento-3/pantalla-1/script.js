@@ -6,6 +6,7 @@ let narracion = document.getElementById("narracion");
 let guiaGesto = document.getElementById("guia-gesto");
 let botonVamos = document.getElementById("boton-vamos");
 
+
 // GUARDAR LOS CINCO ESPACIOS DE LAS ANIMACIONES
 
 let animacionesTap = [
@@ -283,7 +284,9 @@ function iniciarTemporizador() {
 
         tiempo = tiempo + 1;
 
-        if (tiempo >= 5) {
+        // AHORA SOLO NECESITA TRES SEGUNDOS
+
+        if (tiempo >= 3) {
 
             clearInterval(temporizador);
 

@@ -1,3 +1,4 @@
+
 // ELEMENTOS DE LA PANTALLA
 
 let titulo = document.getElementById("titulo");
@@ -23,15 +24,12 @@ lottie.loadAnimation({
 
 // VARIABLES DE LOS AUDIOS
 
-let musicaFeliz = new Audio("../../sonidos/música feliz.mp3");
+// El suspiro sigue siendo un sonido propio de esta pantalla.
 let suspiro = new Audio("../../sonidos/suspiro con oh.mp3");
 
 
-// La música feliz se repite mientras permanezca activa.
-musicaFeliz.loop = true;
+// AJUSTAR EL VOLUMEN
 
-// Ajusta el volumen de los audios.
-musicaFeliz.volume = 0.35;
 suspiro.volume = 0.8;
 
 
@@ -76,31 +74,6 @@ async function cargarDatos() {
     }
 
 
-    // RECUPERAR LA POSICIÓN DE LA MÚSICA
-
-    let posicionGuardada = sessionStorage.getItem("posicionMusicaFeliz");
-
-    if (posicionGuardada !== null) {
-
-        // Continúa desde el segundo en el que quedó en Momento 1.
-        musicaFeliz.currentTime = Number(posicionGuardada);
-
-    }
-
-
-    // REPRODUCIR LA MÚSICA FELIZ
-
-    musicaFeliz.play().then(function() {
-
-        console.log("La música feliz continúa en Momento 2.");
-
-    }).catch(function() {
-
-        console.log("El navegador bloqueó la música automática.");
-
-    });
-
-
     // REPRODUCIR LA QUEJA DE PAPÁ NOEL
 
     // Espera un momento para que primero aparezca el texto.
@@ -117,16 +90,7 @@ async function cargarDatos() {
 }
 
 
-// GUARDAR LA POSICIÓN DE LA MÚSICA ANTES DE CAMBIAR DE PANTALLA
-
-zonaRegalos.addEventListener("click", function() {
-
-    // Guarda el segundo exacto en el que va la música.
-    sessionStorage.setItem("posicionMusicaFeliz", musicaFeliz.currentTime);
-
-});
-
-
 // INICIAR PANTALLA
 
+// Carga los textos y actualiza el contador.
 cargarDatos();

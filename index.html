@@ -85,6 +85,12 @@
         let musicaAmbiente = document.getElementById("musica-ambiente");
 
 
+        // VARIABLES PARA CONTROLAR LA MÚSICA
+
+        let musicaFelizIniciada = false;
+        let musicaAmbienteIniciada = false;
+
+
         // CONFIGURAR LOS VOLÚMENES
 
         musicaFeliz.volume = 0.20;
@@ -95,17 +101,41 @@
 
         window.addEventListener("message", function(event) {
 
+
+            // REINICIAR LAS MÚSICAS CUANDO EMPIEZA UNA PARTIDA NUEVA
+
+            if (event.data === "reiniciar-musicas") {
+
+                musicaFeliz.pause();
+                musicaAmbiente.pause();
+
+                musicaFeliz.currentTime = 0;
+                musicaAmbiente.currentTime = 0;
+
+                musicaFelizIniciada = false;
+                musicaAmbienteIniciada = false;
+
+            }
+
+
             // INICIAR LA MÚSICA FELIZ
 
             if (event.data === "iniciar-musica-feliz") {
 
-                musicaAmbiente.pause();
+                // Evita volver a empezar la canción si ya está sonando.
+                if (musicaFelizIniciada === false && musicaAmbienteIniciada === false) {
 
-                musicaFeliz.play().catch(function() {
+                    musicaFeliz.play().then(function() {
 
-                    console.log("No se pudo iniciar la música feliz.");
+                        musicaFelizIniciada = true;
 
-                });
+                    }).catch(function() {
+
+                        console.log("No se pudo iniciar la música feliz.");
+
+                    });
+
+                }
 
             }
 
@@ -114,31 +144,48 @@
 
             if (event.data === "cambiar-musica-ambiente") {
 
-                musicaFeliz.pause();
+                // Solo cambia de canción la primera vez que recibe el mensaje.
+                if (musicaAmbienteIniciada === false) {
 
-                musicaAmbiente.currentTime = 0;
+                    musicaFeliz.pause();
+
+                    musicaAmbiente.currentTime = 0;
+
+                    musicaAmbiente.play().then(function() {
+
+                        musicaAmbienteIniciada = true;
+
+                    }).catch(function() {
+
+                        console.log("No se pudo iniciar la música ambiente.");
+
+                    });
+
+                }
+
+            }
+
+
+            // PAUSAR LA MÚSICA AMBIENTE
+
+            if (event.data === "pausar-musica-ambiente") {
+
+                musicaAmbiente.pause();
+
+            }
+
+
+            // REANUDAR LA MÚSICA AMBIENTE
+
+            if (event.data === "reanudar-musica-ambiente") {
 
                 musicaAmbiente.play().catch(function() {
 
-                    console.log("No se pudo iniciar la música ambiente.");
-
-                });
-
-            }
-            
-
-            // PAUSAR LA MÚSICA AMBIENTE.
-            if(event.data==="pausar-musica-ambiente") {
-                musicaAmbiente.pause();
-            }
-            
-            // REANUDAR LA MÚSICA AMBIENTE.
-            if(event.data==="reanudar-musica-ambiente") {
-
-                musicaAmbiente.play().catch(function(){
                     console.log("No se pudo reanudar la música ambiente.");
+
                 });
-}
+
+            }
 
         });
 

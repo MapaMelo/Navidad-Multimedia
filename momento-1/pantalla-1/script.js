@@ -1,3 +1,4 @@
+
 // REINICIAR LOS DATOS DE LA PARTIDA
 
 function reiniciarPartida() {
@@ -6,6 +7,9 @@ function reiniciarPartida() {
     localStorage.removeItem("juguetesTerminados");
     localStorage.removeItem("jugueteSeleccionado");
     localStorage.removeItem("papelSeleccionado");
+
+    // MOMENTO 2: COMENTARIO DE LA MÚSICA
+    localStorage.removeItem("comentarioMusicaMostrado");
 
     // MOMENTO 4: MAPA
     localStorage.removeItem("lugarSeleccionado");
@@ -27,12 +31,8 @@ let botonComenzar = document.getElementById("boton-comenzar");
 
 // VARIABLES DE LOS AUDIOS
 
-let musicaFeliz;
 let reloj;
 let ohOtraVez;
-
-let musicaIniciada = false;
-let ohReproducido = false;
 
 
 // FUNCIÓN PARA CARGAR LOS DATOS
@@ -54,9 +54,6 @@ async function cargarDatos() {
 
     // AUDIOS
 
-    // Música feliz que acompaña el inicio.
-    musicaFeliz = new Audio("../../sonidos/música feliz.mp3");
-
     // Sonido del reloj que ya teníamos en el proyecto.
     reloj = new Audio(datos.audio.reloj);
 
@@ -64,33 +61,14 @@ async function cargarDatos() {
     ohOtraVez = new Audio("../../sonidos/oh de otra vez.mp3");
 
 
-    // La música feliz se repite mientras esté activa.
-    musicaFeliz.loop = true;
-
-    // El reloj también se repite.
+    // El reloj se repite.
     reloj.loop = true;
 
 
     // VOLUMEN DE LOS AUDIOS
 
-    musicaFeliz.volume = 0.35;
     reloj.volume = 0.25;
     ohOtraVez.volume = 0.8;
-
-
-    // REPRODUCIR LA MÚSICA FELIZ
-
-    musicaFeliz.play().then(function() {
-
-        // Indica que la música sí pudo comenzar.
-        musicaIniciada = true;
-
-    }).catch(function() {
-
-        // Algunos navegadores bloquean la música automática.
-        console.log("El navegador bloqueó la reproducción automática.");
-
-    });
 
 
     // REPRODUCIR EL RELOJ
@@ -104,38 +82,31 @@ async function cargarDatos() {
 
     // REPRODUCIR OH DE OTRA VEZ
 
-    // Espera hasta que la música llegue al segundo 5.
-    musicaFeliz.addEventListener("timeupdate", function() {
+    // Espera cinco segundos antes de reproducir el sonido.
+    setTimeout(function() {
 
-        if (musicaFeliz.currentTime >= 5 && ohReproducido === false) {
+        // Empieza a reproducir desde el segundo 5 del archivo.
+        ohOtraVez.currentTime = 5;
 
-            // Marca el sonido para que no se repita.
-            ohReproducido = true;
+        ohOtraVez.play().then(function() {
 
-            // Empieza a reproducir desde el segundo 5 del archivo.
-            ohOtraVez.currentTime = 5;
+            // Un segundo después, detiene el sonido.
+            setTimeout(function() {
 
-            ohOtraVez.play().then(function() {
+                ohOtraVez.pause();
 
-                // Un segundo después, detiene el sonido.
-                setTimeout(function() {
+                // Deja el audio preparado para otra reproducción.
+                ohOtraVez.currentTime = 5;
 
-                    ohOtraVez.pause();
+            }, 1000);
 
-                    // Deja el audio preparado para otra reproducción.
-                    ohOtraVez.currentTime = 5;
+        }).catch(function() {
 
-                }, 1000);
+            console.log("No se pudo reproducir oh de otra vez.");
 
-            }).catch(function() {
+        });
 
-                console.log("No se pudo reproducir oh de otra vez.");
-
-            });
-
-        }
-
-    });
+    }, 5000);
 
 }
 
@@ -147,54 +118,18 @@ botonComenzar.addEventListener("click", function(event) {
     // Evita que el enlace cambie de pantalla inmediatamente.
     event.preventDefault();
 
+    // Intenta iniciar la música feliz desde el reproductor principal.
+    // Si ya está sonando, el index principal no la reinicia.
+    window.parent.postMessage("iniciar-musica-feliz", "*");
 
-    // FUNCIÓN PARA PASAR A MOMENTO 2
 
-    function pasarAMomento2() {
-
-        // Guarda el segundo exacto en el que quedó la música.
-        sessionStorage.setItem("posicionMusicaFeliz", musicaFeliz.currentTime);
-
-        // Indica que la música feliz estaba activa.
-        sessionStorage.setItem("musicaFelizActiva", "true");
-
-        // Guarda si ya se reprodujo el sonido de "oh de otra vez".
-        sessionStorage.setItem("ohOtraVezReproducido", ohReproducido);
+    // Espera un segundo para que la música alcance a escucharse.
+    setTimeout(function() {
 
         // Pasa a la pantalla de preparación de regalos.
         window.location.href = botonComenzar.href;
 
-    }
-
-
-    // Si la música ya está sonando, pasa directamente.
-    if (musicaIniciada === true) {
-
-        pasarAMomento2();
-
-    } else {
-
-        // Si el navegador bloqueó la música automática,
-        // intenta iniciarla con el clic del usuario.
-        musicaFeliz.play().then(function() {
-
-            musicaIniciada = true;
-
-            // Espera un segundo para que alcance a escucharse.
-            setTimeout(function() {
-
-                pasarAMomento2();
-
-            }, 1000);
-
-        }).catch(function() {
-
-            // Si tampoco se puede reproducir, continúa normalmente.
-            pasarAMomento2();
-
-        });
-
-    }
+    }, 1000);
 
 });
 
@@ -207,6 +142,11 @@ reiniciarPartida();
 // Carga los textos y prepara los audios.
 cargarDatos();
 
-// AVISAR AL INDEX PRINCIPAL QUE DEBE INICIAR LA MÚSICA
+
+// AVISAR AL INDEX PRINCIPAL QUE DEBE REINICIAR LAS MÚSICAS
+
+window.parent.postMessage("reiniciar-musicas", "*");
+
+// AVISAR AL INDEX PRINCIPAL QUE DEBE INICIAR LA MÚSICA FELIZ
 
 window.parent.postMessage("iniciar-musica-feliz", "*");
