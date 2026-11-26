@@ -1,18 +1,32 @@
+
 <!doctype html>
 <html lang="es">
 
 <head>
+
+    <!-- Permite utilizar tildes y caracteres especiales. -->
     <meta charset="utf-8">
+
+    <!-- Adapta la página al tamaño de la pantalla del celular. -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Nombre de la pantalla. -->
     <title>Trineo - Papá Noel</title>
 
-    <!-- CONECTAR CSS Y JAVASCRIPT -->
+    <!-- Conecta el archivo de estilos. -->
     <link rel="stylesheet" href="style.css">
+
+    <!-- Conecta el reproductor de animaciones Lottie. -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js" defer></script>
+
+    <!-- Conecta JavaScript y espera a que cargue el HTML. -->
     <script src="script.js" defer></script>
+
 </head>
 
 <body oncontextmenu="return false;">
 
+    <!-- CONTENEDOR PRINCIPAL DEL JUEGO -->
     <main id="contenedor-juego">
 
         <div id="pantalla">
@@ -25,9 +39,24 @@
                 <p id="narracion"></p>
             </div>
 
-            <!-- INSTRUCCIONES PARA EL GESTO -->
+            <!-- GUÍA VISUAL DE LOS CINCO DEDOS -->
             <div id="guia-gesto">
-                <p id="texto-guia">Apoya los cinco dedos sobre la pantalla</p>
+
+                <!-- PRIMER DEDO: POSICIÓN IZQUIERDA -->
+                <div id="dedo-1" class="animacion-tap"></div>
+
+                <!-- SEGUNDO DEDO: UN POCO MÁS A LA DERECHA Y ARRIBA -->
+                <div id="dedo-2" class="animacion-tap"></div>
+
+                <!-- TERCER DEDO: MÁS A LA DERECHA Y ARRIBA -->
+                <div id="dedo-3" class="animacion-tap"></div>
+
+                <!-- CUARTO DEDO: A LA DERECHA Y UN POCO MÁS ABAJO -->
+                <div id="dedo-4" class="animacion-tap"></div>
+
+                <!-- QUINTO DEDO: MÁS A LA DERECHA Y ABAJO -->
+                <div id="dedo-5" class="animacion-tap"></div>
+
             </div>
 
             <!-- BOTÓN PARA CONTINUAR -->

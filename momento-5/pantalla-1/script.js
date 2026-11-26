@@ -4,9 +4,12 @@ let fachada = document.getElementById("fachada");
 let narracion = document.getElementById("narracion");
 let cantidadEntregas = document.getElementById("cantidad-entregas");
 let textoInstruccion = document.getElementById("texto-instruccion");
+let instruccion = document.getElementById("instruccion");
 
 let regalo = document.getElementById("regalo");
 let imagenRegalo = document.getElementById("imagen-regalo");
+
+let animacionSwipe = document.getElementById("animacion-swipe");
 
 
 // VARIABLES DEL PROYECTO
@@ -129,6 +132,15 @@ async function cargarDatos() {
     narracion.textContent = datos.narracionInicial;
     textoInstruccion.textContent = datos.instruccionInicial;
 
+    // MOSTRAR LA INSTRUCCIÓN SOLO SI TODAVÍA NO SE HA
+    // SELECCIONADO NINGUNA VENTANA NI COMPLETADO ENTREGAS.
+
+    if (ventanasEntregadas.length === 0) {
+        instruccion.style.display = "block";
+    } else {
+        instruccion.style.display = "none";
+    }
+
     // BUSCAR LA FACHADA DEL PAÍS SELECCIONADO
 
     if (fachadas[lugarSeleccionado]) {
@@ -225,6 +237,10 @@ function seleccionarVentana(numero) {
     ventanaSeleccionada = numero;
     localStorage.setItem("ventanaSeleccionada", numero);
 
+    // OCULTAR DEFINITIVAMENTE LA INSTRUCCIÓN DE DOBLE TOQUE
+
+    instruccion.style.display = "none";
+
     // QUITAR EL RESALTADO ANTERIOR
 
     for (let i = 1; i <= 6; i++) {
@@ -243,7 +259,7 @@ function seleccionarVentana(numero) {
 
     // MOSTRAR EL REGALO QUE CORRESPONDE
 
-    imagenRegalo.src = "assets/" + regaloActual + ". REGALO M.jpg";
+    imagenRegalo.src = "assets/" + regaloActual + " REGALO M.jpg";
 
     regalo.style.display = "block";
     regalo.style.transform = "translate(0, 0)";
@@ -251,10 +267,13 @@ function seleccionarVentana(numero) {
     regalo.classList.remove("volando");
     regalo.classList.remove("fallido");
 
-    // ACTUALIZAR LOS TEXTOS
+    // MOSTRAR LA ANIMACIÓN DE SWIPE
+
+    animacionSwipe.style.display = "block";
+
+    // ACTUALIZAR LA NARRACIÓN DE PAPÁ NOEL
 
     narracion.textContent = datos.narracionSeleccion;
-    textoInstruccion.textContent = datos.instruccionSeleccion;
 
 }
 
@@ -442,7 +461,6 @@ function fallarLanzamiento() {
     }
 
     narracion.textContent = datos.fallos[posicionMensaje];
-    textoInstruccion.textContent = "¡Inténtalo otra vez!";
 
     // DEVOLVER EL REGALO A SU POSICIÓN
 
@@ -501,6 +519,10 @@ function completarEntrega() {
     regalo.style.transform = "translate(0, 0)";
     regalo.classList.remove("volando");
 
+    // OCULTAR LA ANIMACIÓN DE SWIPE
+
+    animacionSwipe.style.display = "none";
+
     // ACTUALIZAR EL CONTADOR
 
     actualizarContador();
@@ -543,12 +565,13 @@ function mostrarHistoria() {
 
     }
 
+    // NO VOLVER A MOSTRAR LA INSTRUCCIÓN DE DOBLE TOQUE
+
+    instruccion.style.display = "none";
+
     // INDICAR QUE YA SE PUEDE SELECCIONAR OTRA VENTANA
 
     if (ventanasEntregadas.length < 6) {
-
-        textoInstruccion.textContent =
-            "Toca dos veces otra ventana para continuar.";
 
         // LIBERAR LA SELECCIÓN PARA PODER ELEGIR OTRA VENTANA
 
@@ -567,8 +590,6 @@ function mostrarHistoria() {
     } else {
 
         // DESPUÉS DE LA ÚLTIMA ENTREGA, PASAR AL MOMENTO 6
-
-        textoInstruccion.textContent = "Recorrido terminado.";
 
         entregaEnCurso = true;
 
@@ -590,13 +611,13 @@ function mostrarHistoria() {
 function mostrarFinal() {
 
     regalo.style.display = "none";
+    animacionSwipe.style.display = "none";
+    instruccion.style.display = "none";
 
     // MOSTRAR EL MENSAJE FINAL
 
     narracion.textContent =
         "¡ENTREGAS COMPLETADAS! " + datos.mensajeFinal;
-
-    textoInstruccion.textContent = "Recorrido terminado.";
 
     entregaEnCurso = true;
 
@@ -607,9 +628,20 @@ function mostrarFinal() {
         window.location.href =
             "../../momento-6/pantalla-1/cansado.html";
 
-    }, 796000);
+    }, 7000);
 
 }
+
+
+// CARGAR LA ANIMACIÓN DE SWIPE
+
+lottie.loadAnimation({
+    container: animacionSwipe,
+    renderer: "svg",
+    loop: true,
+    autoplay: true,
+    path: "../../momento-2/pantalla-4/assets/gesto.json"
+});
 
 
 // INICIAR LA PANTALLA

@@ -1,3 +1,4 @@
+
 /* CONFIGURACIÓN GENERAL */
 
 * {
@@ -20,6 +21,7 @@ body {
     -webkit-touch-callout: none;
 }
 
+
 /* CENTRAR LA PANTALLA */
 
 #contenedor-juego {
@@ -30,6 +32,7 @@ body {
     align-items: center;
 }
 
+
 /* CONTENEDOR DE TODA LA ESCENA */
 
 #pantalla {
@@ -39,6 +42,7 @@ body {
     /* Mantener la proporción vertical de las imágenes */
     aspect-ratio: 9 / 16;
 }
+
 
 /* FONDO DEL TRINEO */
 
@@ -64,6 +68,7 @@ body {
     user-select: none;
 }
 
+
 /* PENSAMIENTO DE PAPÁ NOEL */
 
 #texto-trineo {
@@ -84,27 +89,77 @@ body {
     font-weight: bold;
 }
 
-/* GUÍA DEL GESTO */
+
+/* CONTENEDOR DE LAS ANIMACIONES */
 
 #guia-gesto {
     position: absolute;
-    bottom: 7%;
-    left: 10%;
-    width: 80%;
-    background-color: white;
-    border: 3px solid #bd2424;
-    border-radius: 8px;
-    padding: 9px;
-    text-align: center;
-    box-shadow: 0 4px 0 #791515;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    /* Las animaciones no deben bloquear los toques */
+    pointer-events: none;
 }
 
-#guia-gesto p {
-    margin: 0;
-    color: #493629;
-    font-size: clamp(12px, 3vw, 15px);
-    font-weight: bold;
+
+/* CONFIGURACIÓN GENERAL DE CADA ANIMACIÓN */
+
+.animacion-tap {
+    position: absolute;
+
+    /* Tamaño de cada animación */
+    width: 15%;
+    aspect-ratio: 1 / 1;
+
+    /* Evitar que aparezcan todas al mismo tiempo */
+    display: none;
+
+    /* Las animaciones no deben bloquear los toques */
+    pointer-events: none;
 }
+
+
+/* PRIMER DEDO: MÁS A LA IZQUIERDA */
+
+#dedo-1 {
+    left: 10%;
+    top: 55%;
+}
+
+
+/* SEGUNDO DEDO: A LA DERECHA Y MÁS ARRIBA */
+
+#dedo-2 {
+    left: 26%;
+    top: 43%;
+}
+
+
+/* TERCER DEDO: A LA DERECHA Y TODAVÍA MÁS ARRIBA */
+
+#dedo-3 {
+    left: 42%;
+    top: 35%;
+}
+
+
+/* CUARTO DEDO: A LA DERECHA Y UN POCO MÁS ABAJO */
+
+#dedo-4 {
+    left: 58%;
+    top: 41%;
+}
+
+
+/* QUINTO DEDO: A LA DERECHA Y MÁS ABAJO */
+
+#dedo-5 {
+    left: 74%;
+    top: 49%;
+}
+
 
 /* BOTÓN PARA CONTINUAR */
 
@@ -114,12 +169,15 @@ body {
     bottom: 7%;
     left: 25%;
     width: 50%;
+
     background-color: #bd2424;
     border: 3px solid #791515;
     border-radius: 8px;
     padding: 12px;
+
     color: white;
     font-size: clamp(14px, 4vw, 18px);
     font-weight: bold;
+
     box-shadow: 0 4px 0 #791515;
 }

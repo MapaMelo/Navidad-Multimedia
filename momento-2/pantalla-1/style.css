@@ -1,9 +1,11 @@
 /* CONFIGURACIÓN GENERAL */
 
+/* Hace que los tamaños incluyan los bordes y los espacios internos. */
 * {
     box-sizing: border-box;
 }
 
+/* Configuración general de la página. */
 body {
     margin: 0;
     background-color: #252525;
@@ -13,6 +15,7 @@ body {
 
 /* CONTENEDOR DEL JUEGO */
 
+/* Centra la pantalla del juego en el navegador. */
 #contenedor-juego {
     width: 100%;
     min-height: 100vh;
@@ -25,11 +28,14 @@ body {
 
 /* IMAGEN Y ELEMENTOS SUPERPUESTOS */
 
+/* Define el tamaño y la posición de la pantalla del juego.
+   Los demás elementos se ubican encima de este contenedor. */
 #pantalla {
     width: min(100vw, 430px, 56.25vh);
     position: relative;
 }
 
+/* Hace que la imagen de la mesa ocupe todo el ancho disponible. */
 #mesa-trabajo {
     width: 100%;
     height: auto;
@@ -39,6 +45,7 @@ body {
 
 /* TEXTO PRINCIPAL */
 
+/* Ubica el recuadro de narración en la parte superior. */
 #texto-inicio {
     position: absolute;
 
@@ -53,6 +60,7 @@ body {
     text-align: center;
 }
 
+/* Define la apariencia del texto de narración. */
 #texto-inicio p {
     margin: 0;
     color: #493629;
@@ -63,6 +71,7 @@ body {
 
 /* CONTADOR DE REGALOS */
 
+/* Ubica el contador en la esquina inferior derecha. */
 #contador {
     position: absolute;
     top: 85%;
@@ -76,6 +85,7 @@ body {
     text-align: center;
 }
 
+/* Define la apariencia de los textos del contador. */
 #contador p {
     margin: 2px 0;
     color: #493629;
@@ -84,8 +94,10 @@ body {
 }
 
 
-/* BOTÓN TOUCH */
+/* ANIMACIÓN TAP */
 
+/* Ubica la zona interactiva en el lugar donde antes estaba el botón.
+   También permite que el usuario pueda tocar la animación para continuar. */
 #zona-regalos {
     position: absolute;
 
@@ -93,29 +105,16 @@ body {
     left: 10%;
     width: 25%;
 
-    padding: 8px;
+    /* Mantiene la zona cuadrada para que la animación no se deforme. */
+    aspect-ratio: 1 / 1;
 
-    background-color: white;
-    border: 3px solid #bd2424;
-    border-radius: 8px;
-
-    text-align: center;
+    display: block;
     text-decoration: none;
-
-    box-shadow: 0 4px 0 #791515;
+    cursor: pointer;
 }
 
-
-/* TEXTO DEL BOTÓN */
-
-#zona-regalos p {
-    margin: 3px 0;
-    color: #bd2424;
-    font-size: clamp(13px, 4vw, 18px);
-    font-weight: bold;
-}
-
-#zona-regalos p:last-child {
-    color: #493629;
-    font-size: clamp(9px, 2.5vw, 12px);
+/* Hace que la animación ocupe todo el espacio de la zona interactiva. */
+#animacion-tap {
+    width: 100%;
+    height: 100%;
 }

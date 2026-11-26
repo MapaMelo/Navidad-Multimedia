@@ -1,24 +1,41 @@
+
 <!doctype html>
 <html lang="es">
+
 <head>
+
+    <!-- Permite utilizar tildes y caracteres especiales. -->
     <meta charset="utf-8">
+
+    <!-- Adapta la página al tamaño de la pantalla del celular. -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Nombre de la pantalla. -->
     <title>Envolver regalo - Papá Noel</title>
 
-    <!-- CONECTAR CSS Y JAVASCRIPT -->
+    <!-- Conecta el archivo de estilos. -->
     <link rel="stylesheet" href="style.css">
+
+    <!-- Conecta el reproductor de animaciones Lottie. -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js" defer></script>
+
+    <!-- Conecta JavaScript y espera a que cargue el HTML. -->
     <script src="script.js" defer></script>
+
 </head>
 
 <body>
+
+    <!-- Contenedor principal del juego. -->
     <main id="contenedor-juego">
 
+        <!-- Contenedor de la imagen y los elementos superpuestos. -->
         <div id="pantalla">
 
             <!-- IMAGEN DEL JUGUETE SOBRE EL PAPEL -->
             <img id="regalo" src="" alt="Regalo sobre el papel">
 
-            <!-- CONTADOR -->
+            <!-- CONTADOR DE REGALOS -->
             <div id="contador">
                 <p>REGALOS</p>
                 <p id="cantidad-regalos">0/6</p>
@@ -29,11 +46,16 @@
                 <p id="narracion"></p>
             </div>
 
-            <!-- GUÍA DEL GESTO -->
-            <div id="guia-gesto">
-                <p>PINCH TO ZOOM</p>
-                <p>Junta dos dedos</p>
-            </div>
+            <!-- GUÍA VISUAL DEL GESTO DE PINCH -->
+             <div id="guia-gesto">
+                
+                <!-- PRIMERA MANO: GIRADA 180 GRADOS -->
+                  <div id="gesto-izquierda"></div>
+                  
+                  <!-- SEGUNDA MANO: POSICIÓN ORIGINAL -->
+                    <div id="gesto-derecha"></div>
+                
+                </div>
 
             <!-- MENSAJE CUANDO EL REGALO ESTÁ ENVUELTO -->
             <div id="mensaje-final">
@@ -44,5 +66,6 @@
         </div>
 
     </main>
+
 </body>
 </html>

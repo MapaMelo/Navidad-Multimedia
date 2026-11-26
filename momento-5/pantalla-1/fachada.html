@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="es">
 
@@ -7,8 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Entrega de regalos - Papá Noel</title>
 
-    <!-- CONECTAR CSS Y JAVASCRIPT -->
+    <!-- CONECTAR CSS, LIBRERÍA LOTTIE Y JAVASCRIPT -->
     <link rel="stylesheet" href="style.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js" defer></script>
     <script src="script.js" defer></script>
 </head>
 
@@ -48,7 +49,7 @@
                 <p id="cantidad-entregas">0/6</p>
             </div>
 
-            <!-- INSTRUCCIÓN -->
+            <!-- INSTRUCCIÓN INICIAL DE DOBLE TOQUE -->
             <div id="instruccion">
                 <p id="texto-instruccion"></p>
             </div>
@@ -56,8 +57,10 @@
             <!-- REGALO QUE SE DEBE LANZAR -->
             <div id="regalo">
                 <img id="imagen-regalo" src="" alt="Regalo de Papá Noel">
-                <p id="texto-regalo">Desliza hacia la ventana</p>
             </div>
+
+            <!-- ANIMACIÓN PARA INDICAR EL SWIPE -->
+            <div id="animacion-swipe"></div>
 
         </div>
 

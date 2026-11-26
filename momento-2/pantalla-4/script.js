@@ -1,3 +1,4 @@
+
 // ELEMENTOS DE LA PANTALLA
 let pantalla = document.getElementById("pantalla");
 let regalo = document.getElementById("regalo");
@@ -6,6 +7,35 @@ let cantidadRegalos = document.getElementById("cantidad-regalos");
 let guiaGesto = document.getElementById("guia-gesto");
 let mensajeFinal = document.getElementById("mensaje-final");
 let botonContinuar = document.getElementById("boton-continuar");
+
+
+// ANIMACIONES DE LA GUÍA DEL GESTO
+
+// RECUPERAR LOS DOS ESPACIOS DE LAS ANIMACIONES
+let gestoIzquierda = document.getElementById("gesto-izquierda");
+let gestoDerecha = document.getElementById("gesto-derecha");
+
+// ANIMACIÓN DE LA MANO IZQUIERDA
+lottie.loadAnimation({
+
+    container: gestoIzquierda,
+    renderer: "svg",
+    loop: true,
+    autoplay: true,
+    path: "assets/gesto.json"
+
+});
+
+// ANIMACIÓN DE LA MANO DERECHA
+lottie.loadAnimation({
+
+    container: gestoDerecha,
+    renderer: "svg",
+    loop: true,
+    autoplay: true,
+    path: "assets/gesto.json"
+
+});
 
 // RECUPERAR LAS ELECCIONES GUARDADAS
 let juguete = localStorage.getItem("jugueteSeleccionado");
@@ -68,7 +98,6 @@ async function cargarDatos() {
     }
 
     // MOSTRAR EL JUGUETE SOBRE EL PAPEL
-    // Esta instrucción se ejecuta antes de cargar el JSON.
     regalo.src = "assets/" + imagenesIniciales[juguete];
 
     // MOSTRAR EL CONTADOR
@@ -188,11 +217,14 @@ botonContinuar.onclick = function() {
 
     // SI YA ESTÁN LOS SEIS REGALOS, IR AL TRINEO
     if (juguetesTerminados.length === 6) {
+
         window.location.href = "../../momento-3/pantalla-1/trineo.html";
+
     } else {
 
-        // SI FALTAN REGALOS, VOLVER A LA MESA
-        window.location.href = "../pantalla-1/mesatrabajo.html";
+        // SI FALTAN REGALOS, VOLVER DIRECTAMENTE A LA ESTANTERÍA
+        window.location.href = "../pantalla-2/estanteria.html";
+
     }
 };
 

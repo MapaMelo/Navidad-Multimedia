@@ -1,3 +1,4 @@
+
 /* CONFIGURACIÓN GENERAL */
 * {
     box-sizing: border-box;
@@ -72,30 +73,44 @@ body {
     font-weight: bold;
 }
 
-/* GUÍA DEL GESTO */
+/* CONTENEDOR DE LAS DOS ANIMACIONES */
 #guia-gesto {
     position: absolute;
-    top: 72%;
-    left: 20%;
-    width: 60%;
-    background-color: white;
-    border: 3px solid #bd2424;
-    border-radius: 8px;
-    padding: 8px;
-    text-align: center;
-    box-shadow: 0 4px 0 #791515;
+
+    /* Ubicar las manos hacia el centro de la pantalla */
+    top: 43%;
+    left: 50%;
+
+    /* Tamaño del conjunto */
+    width: 65%;
+    height: 18%;
+
+    /* Centrar las dos animaciones */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* Inclinar las dos manos en diagonal */
+    transform: translate(-50%, -50%) rotate(-20deg);
+
+    pointer-events: none;
 }
 
-#guia-gesto p {
-    margin: 2px 0;
-    color: #bd2424;
-    font-size: clamp(12px, 3.5vw, 16px);
-    font-weight: bold;
+/* ESPACIO DE CADA MANO */
+#gesto-izquierda,
+#gesto-derecha {
+    width: 50%;
+    height: 100%;
 }
 
-#guia-gesto p:last-child {
-    color: #493629;
-    font-size: clamp(10px, 2.5vw, 12px);
+/* GIRAR LA MANO IZQUIERDA 180 GRADOS */
+#gesto-izquierda {
+    transform: rotate(180deg);
+}
+
+/* LA MANO DERECHA CONSERVA SU POSICIÓN ORIGINAL */
+#gesto-derecha {
+    transform: rotate(0deg);
 }
 
 /* MENSAJE DESPUÉS DE ENVOLVER */

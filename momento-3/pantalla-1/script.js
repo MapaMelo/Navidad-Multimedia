@@ -1,10 +1,46 @@
+
 // ELEMENTOS DE LA PANTALLA
 
 let trineo = document.getElementById("trineo");
 let narracion = document.getElementById("narracion");
-let textoGuia = document.getElementById("texto-guia");
 let guiaGesto = document.getElementById("guia-gesto");
 let botonVamos = document.getElementById("boton-vamos");
+
+// GUARDAR LOS CINCO ESPACIOS DE LAS ANIMACIONES
+let animacionesTap = [
+    document.getElementById("dedo-1"),
+    document.getElementById("dedo-2"),
+    document.getElementById("dedo-3"),
+    document.getElementById("dedo-4"),
+    document.getElementById("dedo-5")
+];
+
+
+// ANIMACIONES DE LOS CINCO DEDOS
+
+// Cargar una animación de tap en cada uno de los cinco espacios.
+for (let i = 0; i < 5; i++) {
+
+    lottie.loadAnimation({
+
+        // Lugar donde aparecerá cada animación.
+        container: animacionesTap[i],
+
+        // Dibujar la animación utilizando SVG.
+        renderer: "svg",
+
+        // Repetir la animación continuamente.
+        loop: true,
+
+        // Reproducir automáticamente.
+        autoplay: true,
+
+        // Utilizar el mismo archivo de animación tap.
+        path: "../../momento-2/pantalla-1/assets/tap.json"
+
+    });
+
+}
 
 
 // EVITAR QUE APAREZCA EL MENÚ DEL NAVEGADOR
@@ -38,6 +74,39 @@ let intentosFallidos = 0;
 let datos;
 
 
+// FUNCIÓN PARA MOSTRAR LAS ANIMACIONES PROGRESIVAMENTE
+
+function actualizarAnimaciones(cantidad) {
+
+    // Mostrar solamente la animación del siguiente dedo que debe apoyarse.
+    for (let i = 0; i < 5; i++) {
+
+        if (i === cantidad) {
+
+            animacionesTap[i].style.display = "block";
+
+        } else {
+
+            animacionesTap[i].style.display = "none";
+
+        }
+
+    }
+
+    // Cuando ya están apoyados los cinco dedos, ocultar todas las animaciones.
+    if (cantidad === 5) {
+
+        guiaGesto.style.display = "none";
+
+    } else {
+
+        guiaGesto.style.display = "block";
+
+    }
+
+}
+
+
 // FUNCIÓN PARA CARGAR LOS DATOS
 
 async function cargarDatos() {
@@ -50,6 +119,10 @@ async function cargarDatos() {
 
     // Muestra el pensamiento inicial.
     narracion.textContent = datos.narraciones[0];
+
+    // Al principio aparece la primera animación.
+    actualizarAnimaciones(0);
+
 }
 
 
@@ -65,13 +138,24 @@ function actualizarPantalla(cantidad) {
     // Guarda la cantidad actual de dedos.
     cantidadDedos = cantidad;
 
+
     // CAMBIAR EL FONDO SEGÚN LOS DEDOS APOYADOS
 
     if (cantidadDedos === 0) {
+
         trineo.style.backgroundImage = "url('assets/dedos0.jpg')";
+
     } else {
+
         trineo.style.backgroundImage = "url('assets/dedo" + cantidadDedos + ".jpg')";
+
     }
+
+
+    // ACTUALIZAR LAS ANIMACIONES DE LOS DEDOS
+
+    actualizarAnimaciones(cantidadDedos);
+
 
     // ACTUALIZAR EL PENSAMIENTO DE PAPÁ NOEL
 
@@ -84,8 +168,11 @@ function actualizarPantalla(cantidad) {
         } else if (intentosFallidos === 0) {
 
             narracion.textContent = datos.narraciones[0];
+
         }
+
     }
+
 
     // REVISAR SI ESTÁN APOYADOS LOS CINCO DEDOS
 
@@ -93,7 +180,9 @@ function actualizarPantalla(cantidad) {
 
         // Iniciar el temporizador si todavía no está funcionando.
         if (temporizador === null) {
+
             iniciarTemporizador();
+
         }
 
     } else {
@@ -105,18 +194,25 @@ function actualizarPantalla(cantidad) {
             // Aumentar la cantidad de intentos fallidos.
             intentosFallidos = intentosFallidos + 1;
 
+
             // MOSTRAR UN COMENTARIO SEGÚN EL INTENTO
 
             if (intentosFallidos === 1) {
+
                 narracion.textContent = "No pasa nada, vuelve a intentarlo.";
 
             } else if (intentosFallidos === 2) {
+
                 narracion.textContent = "Vamos... ¿tan difícil es?";
 
             } else if (intentosFallidos >= 3) {
+
                 narracion.textContent = "¡Pero qué te pasa! ¡Mantén espichado!";
+
             }
+
         }
+
 
         // REINICIAR EL TEMPORIZADOR
 
@@ -125,7 +221,9 @@ function actualizarPantalla(cantidad) {
         temporizador = null;
 
         tiempo = 0;
+
     }
+
 }
 
 
@@ -138,7 +236,9 @@ document.addEventListener("touchstart", function(event) {
 
     // Como máximo se reconocen cinco dedos.
     if (cantidad > 5) {
+
         cantidad = 5;
+
     }
 
     // Actualizar la pantalla.
@@ -202,9 +302,11 @@ function iniciarTemporizador() {
 
             // Mostrar el botón para continuar.
             botonVamos.style.display = "block";
+
         }
 
     }, 1000);
+
 }
 
 
@@ -214,6 +316,7 @@ botonVamos.onclick = function() {
 
     // Pasar al mapa del siguiente momento.
     window.location.href = "../../momento-4/pantalla-1/mapa.html";
+
 };
 
 

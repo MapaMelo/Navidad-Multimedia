@@ -15,6 +15,10 @@
     <!-- Conecta el archivo de estilos. -->
     <link rel="stylesheet" href="style.css">
 
+    <!-- Conecta el reproductor de animaciones Lottie.
+         Este permite mostrar animaciones creadas a partir de archivos JSON. -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js" defer></script>
+
     <!-- Conecta JavaScript y espera a que cargue el HTML. -->
     <script src="script.js" defer></script>
 
@@ -42,10 +46,13 @@
                 <p id="cantidad-regalos">0/6</p>
             </div>
 
-            <!-- BOTÓN VISIBLE PARA CONTINUAR -->
-             <a id="zona-regalos" href="../pantalla-2/estanteria.html">
-                <p>TOUCH</p>
-                <p>Toca aquí</p>
+            <!-- Zona que permite pasar a la siguiente pantalla.
+                 Al tocar la animación, el usuario puede continuar. -->
+            <a id="zona-regalos" href="../pantalla-2/estanteria.html">
+
+                <!-- Espacio donde aparecerá la animación de tap. -->
+                <div id="animacion-tap"></div>
+
             </a>
 
         </div>
